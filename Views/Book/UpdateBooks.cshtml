@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InsertBook</title>
+</head>
+<body>
+    <form action="UpdateBooks" method="post">
+        @Html.AntiForgeryToken()
+
+
+        <label for="id">id:</label><br>
+        <input type="text" id="id" name="id" pattern= [0-9]{0,3} ><br>
+
+
+        <label for="name">name:</label><br>
+        <input type="text" id="name" name="name" pattern=[a-zA-Z\s]{3,20}$ maxlength =20><br>
+
+
+        <label for="isbn">isbn:</label><br>
+        <input type="text" id="isbn" name="isbn" pattern=[a-zA-Z\s0-9]{3,20}$  maxlength =20 ><br>
+
+        <label for="publisher">publisher:</label><br>
+        <input type="text" id="publisher" name="publisher" pattern=[a-zA-Z\s]{3,20}$ maxlength =20><br>
+
+        <label for="author"> author:</label><br>
+        <input type="text" id="author" name="author" pattern=[a-zA-Z\s]{3,20}$ maxlength =20><br>
+
+        <label for="Quantity">Quantity:</label><br>
+        <input type="text" id="quantity" name="quantity" pattern=[0-9]{0,4}><br>
+        <br>
+        <br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+</body>
+</html>
