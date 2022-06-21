@@ -8,7 +8,7 @@ namespace CrudTest.Controllers
     public class BookController : Controller
     {
 
-
+        #region Insert
         [HttpGet]
         public IActionResult InsertBook()
         {
@@ -19,7 +19,7 @@ namespace CrudTest.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public string InsertBook(string name, string isbn, string publisher, string author, int quantity)
+        public RedirectResult InsertBook(string name, string isbn, string publisher, string author, int quantity)
         {
             Book book = new Book()
             {
@@ -29,22 +29,22 @@ namespace CrudTest.Controllers
                 Author = author,
                 Quantity = quantity
             };
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            using (var ctx = new ApplicationDbContext())
             {
-                using (var ctx = new ApplicationDbContext())
-                {
-                    ctx.Books.Add(book);
-                    ctx.SaveChanges();
-                }
-
-                return "done";
+                ctx.Books.Add(book);
+                ctx.SaveChanges();
             }
 
-            else
-                return "Failed";
+            return Redirect(@"~/Book/InsertBook");
+            //}
+
 
         }
+        #endregion
 
+        #region Read
         public IActionResult ReadBooks()
         {
 
@@ -52,8 +52,12 @@ namespace CrudTest.Controllers
             var Books = context.Books.ToList();
             return View(Books);
         }
+        #endregion
 
-        public string DeleteBooks(int id)
+        #region Delete
+
+        [HttpPost]
+        public RedirectResult DeleteBooks(int id)
         {
 
             using (var context = new ApplicationDbContext())
@@ -64,37 +68,66 @@ namespace CrudTest.Controllers
             }
 
 
-            return "Done";
+            return Redirect(@"~/Book/ReadBooks");
         }
+        #endregion
+
+         
+        #region Edit
+
+
 
         [HttpGet]
-        public IActionResult UpdateBooks()
+        public IActionResult OnGet(int id)
         {
-            return View();
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var book = context.Books
+                    .Where(b => b.Id == id)
+                     .Select(s => new Book()
+                     {
+
+                         Id = s.Id,
+                         Name = s.Name,
+                         Author = s.Author,
+                         Publisher = s.Publisher,
+                         ISBN = s.ISBN,
+                         Quantity = s.Quantity,
+
+
+                     }).FirstOrDefault();
+                return View(book);
+
+            }
+
+
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public string UpdateBooks(int id, string name, string isbn, string publisher, string author, int quantity)
+        public RedirectResult OnPost(int id, string name, string isbn, string publisher, string author, int quantity)
         {
-
 
             using (var context = new ApplicationDbContext())
             {
                 var book = context.Books.Find(id);
-
-                book.Name = name;
-                book.ISBN = isbn;
-                book.Publisher = publisher;
-                book.Author = author;
-                book.Quantity = quantity;
+                if (book != null)
+                {
+                    book.Name = name;
+                    book.ISBN = isbn;
+                    book.Publisher = publisher;
+                    book.Author = author;
+                    book.Quantity = quantity;
+                }
 
                 context.SaveChanges();
+
             }
+            return Redirect(@"~/Book/ReadBooks");
 
-
-            return "Done";
         }
 
+        #endregion
     }
 }

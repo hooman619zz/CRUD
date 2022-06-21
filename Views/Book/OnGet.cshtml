@@ -1,0 +1,57 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+@model CrudTest.Models.Book;
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InsertBook</title>
+</head>
+<body>
+    <form action="OnPost" method="post">
+        @Html.AntiForgeryToken()
+
+
+
+        <div class="form-group col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-6 offset-xs-3">
+
+
+            <input type="hidden" asp-for=@Model.Id />
+            <label for="name">name:</label><br>
+            <input type="text" class="form-control" asp-for=@Model.Name id="name" name="name" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 oninvalid="alert('You must fill out the form!');" required><br>
+
+
+            <label for="isbn">isbn:</label><br>
+            <input type="text" class="form-control" asp-for=@Model.ISBN id="isbn" name="isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ required><br>
+
+            <label for="publisher">publisher:</label><br>
+            <input type="text" class="form-control" asp-for=@Model.Publisher id="publisher" name="publisher" oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
+
+            <label for="author"> author:</label><br>
+            <input type="text" class="form-control" asp-for=@Model.Author id="author" name="author" oninvalid="alert('Author Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
+
+            <label for="Quantity">Quantity:</label><br>
+            <input type="text" class="form-control" asp-for=@Model.Quantity id="quantity" name="quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-9999 vared shavadad');" pattern=[0-9]{0,4} required><br>
+            <br>
+            <br>
+
+
+            <button type="submit" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"></path>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"></path>
+                </svg>
+                Update
+            </button>
+        </div>
+    </form>
+
+
+</body>
+</html>

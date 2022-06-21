@@ -3,7 +3,7 @@
 
 
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -21,19 +21,19 @@
 
         <div class="form-group col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-6 offset-xs-3">
             <label for="name">name:</label><br>
-            <input type="text" class="form-control" id="name" name="name" pattern=[a-zA-Z\s]{3,20}$ maxlength=20><br>
+            <input type="text" class="form-control" id="name" name="name" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 oninvalid="alert('You must fill out the form!');" required><br>
 
             <label for="isbn">isbn:</label><br>
-            <input type="text" class="form-control" id="isbn" name="isbn" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20><br>
+            <input type="text" class="form-control" id="isbn" name="isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ required><br>
 
             <label for="publisher">publisher:</label><br>
-            <input type="text" class="form-control" id="publisher" name="publisher" pattern=[a-zA-Z\s]{3,20}$ maxlength=20><br>
+            <input type="text" class="form-control" id="publisher" name="publisher"  oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-20 vared shavadad');"pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
 
             <label for="author"> author:</label><br>
-            <input type="text" class="form-control" id="author" name="author" pattern=[a-zA-Z\s]{3,20}$ maxlength=20><br>
+            <input type="text" class="form-control" id="author" name="author"  oninvalid="alert('Author Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
 
             <label for="Quantity">Quantity:</label><br>
-            <input type="text" class="form-control" id="quantity" name="quantity" pattern=[0-9]{0,4}><br>
+            <input type="text" class="form-control" id="quantity" name="quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-9999 vared shavadad');"pattern=[0-9]{0,4} required><br>
             <br>
             <br>
 
@@ -43,7 +43,7 @@
                 </svg>
                 Save
             </button>
-
+            </div>
     </form>
 
 
