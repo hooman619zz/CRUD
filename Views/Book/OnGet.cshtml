@@ -24,20 +24,20 @@
 
             <input type="hidden" asp-for=@Model.Id />
             <label for="name">name:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Name id="name" name="name" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 oninvalid="alert('Name  Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" required><br>
+            <input type="text" class="form-control" asp-for=@Model.Name id="name" name="name" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 oninvalid="alert('Name  Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" required><br>
 
 
             <label for="isbn">isbn:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.ISBN id="isbn" name="isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ required><br>
+            <input type="text" class="form-control" asp-for=@Model.ISBN id="isbn" name="isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50  required><br>
 
             <label for="publisher">publisher:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Publisher id="publisher" name="publisher" oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
+            <input type="text" class="form-control" asp-for=@Model.Publisher id="publisher" name="publisher" oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 required><br>
 
             <label for="author"> author:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Author id="author" name="author" oninvalid="alert('Author Bayad beyne horoof a-z va aadad 0-20 vared shavadad');" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=20 required><br>
+            <input type="text" class="form-control" asp-for=@Model.Author id="author" name="author" oninvalid="alert('Author Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50  required><br>
 
             <label for="Quantity">Quantity:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Quantity id="quantity" name="quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-9999 vared shavadad');" pattern=[0-9]{0,4} required><br>
+            <input type="text" class="form-control" asp-for=@Model.Quantity id="quantity" name="quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-99999 vared shavadad');" pattern=[0-9]{1,5} maxlength=5  required><br>
             <br>
             <br>
 

@@ -21,26 +21,26 @@ namespace CrudTest.Models
  
 
         [Required]
-        [MinLength(3, ErrorMessage = "The Name Most Be atleast 3 charaters")]
-        [MaxLength(20, ErrorMessage = "The Name cannot Be more than atleast 20 charaters")]
+        [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
+        [MaxLength(50, ErrorMessage = "The Name cannot Be more than atleast 20 charaters")]
         public string Name { get; set; }
 
 
         [Required]
-        [MinLength(3, ErrorMessage = "The ISBN Most Be atleast 3 charaters")]
-        [MaxLength(20, ErrorMessage = "The ISBN cannot Be more than atleast 20 charaters")]
+        [MinLength(1, ErrorMessage = "The ISBN Most Be atleast 3 charaters")]
+        [MaxLength(50, ErrorMessage = "The ISBN cannot Be more than atleast 20 charaters")]
         public string ISBN { get; set; }
 
 
         [Required]
-        [MinLength(3, ErrorMessage = "The Publisher Most Be atleast 3 charaters")]
-        [MaxLength(20, ErrorMessage = "The Publisher cannot Be more than atleast 20 charaters")]
+        [MinLength(1, ErrorMessage = "The Publisher Most Be atleast 3 charaters")]
+        [MaxLength(50, ErrorMessage = "The Publisher cannot Be more than atleast 20 charaters")]
         public string Publisher { get; set; }
 
 
         [Required]
-        [MinLength(3, ErrorMessage = "The Author Most Be atleast 3 charaters")]
-        [MaxLength(20, ErrorMessage = "The Author cannot Be more than atleast 20 charaters")]
+        [MinLength(1, ErrorMessage = "The Author Most Be atleast 3 charaters")]
+        [MaxLength(50, ErrorMessage = "The Author cannot Be more than atleast 20 charaters")]
         public string Author { get; set; }
 
 
@@ -48,7 +48,7 @@ namespace CrudTest.Models
 
 
         [Required]
-        [Range(0,1000)]
+        [Range(0,99999)]
         public int Quantity
         {
             get { return quantity; }

@@ -37,7 +37,7 @@ namespace CrudTest.Controllers
                 ctx.SaveChanges();
             }
 
-            return Redirect(@"~/Book/InsertBook");
+            return Redirect(@"~/Book/ReadBooks");
             //}
 
 
@@ -56,8 +56,34 @@ namespace CrudTest.Controllers
 
         #region Delete
 
+        [HttpGet]
+        public IActionResult DeleteBooks(int id)
+        {
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var book = context.Books
+                    .Where(b => b.Id == id)
+                     .Select(s => new Book()
+                     {
+
+                         Id = s.Id,
+                         Name = s.Name,
+                         Author = s.Author,
+                         Publisher = s.Publisher,
+                         ISBN = s.ISBN,
+                         Quantity = s.Quantity,
+
+
+                     }).FirstOrDefault();
+                return View(book);
+
+            }
+        }
+
         [HttpPost]
-        public RedirectResult DeleteBooks(int id)
+        public RedirectResult DeleteBooksOnPost(int id)
         {
 
             using (var context = new ApplicationDbContext())
@@ -72,7 +98,7 @@ namespace CrudTest.Controllers
         }
         #endregion
 
-         
+
         #region Edit
 
 

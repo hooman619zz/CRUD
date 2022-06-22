@@ -15,8 +15,8 @@
 <body>
     <div class="form-group col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-6 offset-xs-3">
 
-        <table class="table table-striped table-dark">
-            <thead>
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
@@ -40,7 +40,7 @@
                         <td>@item.Publisher</td>
                         <td>@item.Author</td>
                         <td>
-                            <form action="Deletebooks" method="post">
+                            <form action="Deletebooks" method="get">
 
                                 <button type="submit" class="btn btn-outline-danger" id="id" name="id" value=@item.Id>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
