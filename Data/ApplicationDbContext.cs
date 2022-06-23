@@ -5,7 +5,8 @@ namespace CrudTest.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
+        public DbSet<BookModel> Books { get; set; }
+        public DbSet<AuthorModel> Authors { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -21,6 +22,11 @@ namespace CrudTest.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BookModel>()
+                        .HasOne<AuthorModel>(A => A.AuthorModel)
+                        .WithMany(b => b.BookModels)
+                        .HasForeignKey(A => A.AuthorId);
+
 
             base.OnModelCreating(modelBuilder);
         }

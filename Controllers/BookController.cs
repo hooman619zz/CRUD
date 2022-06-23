@@ -1,58 +1,66 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CrudTest.Models;
 using CrudTest.Data;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace CrudTest.Controllers
 {
     public class BookController : Controller
     {
+        #region ctor + jections
+        private ApplicationDbContext _context;
+        public BookController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        #endregion
+
 
         #region Insert
         [HttpGet]
         public IActionResult InsertBook()
         {
-
-            return View();
+            var authors = _context.Authors.ToList();
+            return View(authors);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public RedirectResult InsertBook(string name, string isbn, string publisher, string author, int quantity)
+        public async Task<RedirectResult> InsertBook(string name, string isbn, string publisher, int authorId, int quantity)
         {
-            Book book = new Book()
+            var author = await _context.Authors.FindAsync(authorId);
+
+            BookModel book = new BookModel()
             {
                 Name = name,
                 ISBN = isbn,
                 Publisher = publisher,
-                Author = author,
+                AuthorModel = author,
+                AuthorId = authorId,
                 Quantity = quantity
             };
-            //if (ModelState.IsValid)
-            //{
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.Books.Add(book);
-                ctx.SaveChanges();
-            }
+
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
+
 
             return Redirect(@"~/Book/ReadBooks");
-            //}
 
 
         }
         #endregion
 
+
         #region Read
-        public IActionResult ReadBooks()
+        public async Task<IActionResult> ReadBooks()
         {
 
-            var context = new ApplicationDbContext();
-            var Books = context.Books.ToList();
+            var Books = await _context.Books.ToListAsync();
             return View(Books);
         }
         #endregion
+
 
         #region Delete
 
@@ -60,42 +68,42 @@ namespace CrudTest.Controllers
         public IActionResult DeleteBooks(int id)
         {
 
-            using (var context = new ApplicationDbContext())
-            {
-
-                var book = context.Books
-                    .Where(b => b.Id == id)
-                     .Select(s => new Book()
-                     {
-
-                         Id = s.Id,
-                         Name = s.Name,
-                         Author = s.Author,
-                         Publisher = s.Publisher,
-                         ISBN = s.ISBN,
-                         Quantity = s.Quantity,
 
 
-                     }).FirstOrDefault();
-                return View(book);
+            var book = _context.Books
+                .Where(b => b.Id == id)
+                 .Select(s => new BookModel()
+                 {
 
-            }
+                     Id = s.Id,
+                     Name = s.Name,
+                     AuthorId = s.AuthorId,
+                     AuthorModel = s.AuthorModel,
+                     Publisher = s.Publisher,
+                     ISBN = s.ISBN,
+                     Quantity = s.Quantity,
+
+
+                 }).FirstOrDefault();
+            return View(book);
+
+
         }
 
         [HttpPost]
-        public RedirectResult DeleteBooksOnPost(int id)
+        public async Task<RedirectResult> DeleteBooksOnPost(int id)
         {
 
-            using (var context = new ApplicationDbContext())
-            {
-                var book = context.Books.Find(id);
-                context.Books.Remove(book);
-                context.SaveChanges();
-            }
+
+            var book = await _context.Books.FindAsync(id);
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
+
 
 
             return Redirect(@"~/Book/ReadBooks");
         }
+
         #endregion
 
 
@@ -107,53 +115,133 @@ namespace CrudTest.Controllers
         public IActionResult OnGet(int id)
         {
 
-            using (var context = new ApplicationDbContext())
+
+
+            var book = _context.Books
+                .Where(b => b.Id == id)
+                 .Select(s => new BookModel()
+                 {
+                     Id = s.Id,
+                     Name = s.Name,
+                     AuthorId = s.AuthorId,
+                     AuthorModel = s.AuthorModel,
+                     Publisher = s.Publisher,
+                     ISBN = s.ISBN,
+                     Quantity = s.Quantity,
+
+
+                 }).FirstOrDefault();
+            var authors = _context.Authors.ToList();
+
+            BookListViewModel bookListViewModel = new BookListViewModel()
             {
+                BookModel = book,
+                AuthorModel = authors
+            };
 
-                var book = context.Books
-                    .Where(b => b.Id == id)
-                     .Select(s => new Book()
-                     {
-
-                         Id = s.Id,
-                         Name = s.Name,
-                         Author = s.Author,
-                         Publisher = s.Publisher,
-                         ISBN = s.ISBN,
-                         Quantity = s.Quantity,
+            return View(bookListViewModel);
 
 
-                     }).FirstOrDefault();
-                return View(book);
-
-            }
 
 
         }
 
         [HttpPost]
-        public RedirectResult OnPost(int id, string name, string isbn, string publisher, string author, int quantity)
+        public async Task<RedirectResult> OnPost(int id, string name, string isbn, string publisher, int authorId, int quantity)
         {
 
-            using (var context = new ApplicationDbContext())
+
+            var book = await _context.Books.FindAsync(id);
+            if (book != null)
             {
-                var book = context.Books.Find(id);
-                if (book != null)
-                {
-                    book.Name = name;
-                    book.ISBN = isbn;
-                    book.Publisher = publisher;
-                    book.Author = author;
-                    book.Quantity = quantity;
-                }
-
-                context.SaveChanges();
-
+                book.Name = name;
+                book.ISBN = isbn;
+                book.Publisher = publisher;
+                book.AuthorId = authorId;
+                book.Quantity = quantity;
             }
+
+            await _context.SaveChangesAsync();
+
+
             return Redirect(@"~/Book/ReadBooks");
 
         }
 
+        #endregion
+
+
+        #region Add Author
+        [HttpGet]
+        public IActionResult AddAuthor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<RedirectResult> AddAuthor(string name)
+        {
+            AuthorModel author = new AuthorModel()
+            {
+                Name = name
+            };
+
+
+
+            await _context.Authors.AddAsync(author);
+            await _context.SaveChangesAsync();
+
+
+            return Redirect(@"~/Book/AuthorList");
+        }
+
+
+
+
+
+        #endregion
+
+
+        #region Delete Author
+        [HttpGet]
+        public IActionResult DeleteAuthor(int id)
+        {
+            var author = _context.Authors
+                .Where(a => a.Id == id)
+                 .Select(s => new AuthorModel()
+                 {
+                     Id = s.Id,
+                     Name = s.Name
+                 }).FirstOrDefault();
+            return View(author);
+
+        }
+
+        [HttpPost]
+        public async Task<RedirectResult> DeletAuthorOnPost(int id)
+        {
+
+
+            var author = await _context.Authors.FindAsync(id);
+            _context.Authors.Remove(author);
+            await _context.SaveChangesAsync();
+
+
+
+            return Redirect(@"~/Book/AuthorList");
+        }
+
+        #endregion
+
+
+        #region Author List
+        public async Task<IActionResult> AuthorList()
+        {
+
+            var authors = await _context.Authors.ToListAsync();
+            return View(authors);
+        }
         #endregion
     }
 }

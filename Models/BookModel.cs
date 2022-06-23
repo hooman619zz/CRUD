@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrudTest.Models
 {
-    public delegate void QuantityHandler(Book book, int Quantity);
+    public delegate void QuantityHandler(BookModel book, int Quantity);
 
 
     [Table("Book", Schema = "Book")]
-    public class Book
+    public class BookModel
     {
 
         public event QuantityHandler quantityHandler;
@@ -38,11 +38,10 @@ namespace CrudTest.Models
         public string Publisher { get; set; }
 
 
-        [Required]
-        [MinLength(1, ErrorMessage = "The Author Most Be atleast 3 charaters")]
-        [MaxLength(50, ErrorMessage = "The Author cannot Be more than atleast 20 charaters")]
-        public string Author { get; set; }
+        [ForeignKey("AuthorModel")]
+        public int AuthorId { get; set; }
 
+        public AuthorModel AuthorModel { get; set; }
 
         private int quantity;
 
@@ -68,10 +67,7 @@ namespace CrudTest.Models
             }
         }
 
-        public override string ToString()
-        {
-            return $"{Id}\t{Name}\t{Publisher}\t{Author}\t{Quantity}\t{ISBN}";
-        }
+
 
     }
 }
