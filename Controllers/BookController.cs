@@ -16,12 +16,21 @@ namespace CrudTest.Controllers
         #endregion
 
 
+        #region Book
+
+
         #region Insert
         [HttpGet]
         public IActionResult InsertBook()
         {
             var authors = _context.Authors.ToList();
-            return View(authors);
+            var libraries = _context.Libraries.ToList();
+            BookListViewModel bookListViewModel = new BookListViewModel()
+            {
+                AuthorModel = authors,
+                LibraryModel = libraries
+            };
+            return View(bookListViewModel);
         }
 
         [HttpPost]
@@ -171,6 +180,12 @@ namespace CrudTest.Controllers
         #endregion
 
 
+        #endregion
+
+
+        #region Author
+
+
         #region Add Author
         [HttpGet]
         public IActionResult AddAuthor()
@@ -243,5 +258,150 @@ namespace CrudTest.Controllers
             return View(authors);
         }
         #endregion
+
+
+        #endregion
+
+
+
+        #region Library
+
+
+        #region AddLibrary
+
+        [HttpGet]
+        public IActionResult AddLibrary()
+        {
+            var books = _context.Books.ToList();
+            return View(books);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<RedirectResult> AddLibraryOnPost(string name, string address, int[] arrays)
+        {
+            List<BookModel> books = new List<BookModel>();
+            for (int i = 0; i < arrays.Count(); i++)
+            {
+                BookModel book = _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefault();
+                books.Add(book);
+            }
+
+
+
+            LibraryModel libraryModel = new LibraryModel()
+            {
+
+                Name = name,
+                Address = address,
+                BookModels = books
+
+            };
+
+
+
+            await _context.Libraries.AddAsync(libraryModel);
+            await _context.SaveChangesAsync();
+
+
+            return Redirect(@"~/Book/LibraryList");
+        }
+
+        #endregion
+
+
+        #region Library List
+        public async Task<IActionResult> LibraryList()
+        {
+
+            var libraries = await _context.Libraries.ToListAsync();
+            return View(libraries);
+        }
+        #endregion
+
+
+        #region Delete Library
+        [HttpGet]
+        public IActionResult DeleteLibrary(int id)
+        {
+            var library = _context.Libraries
+                .Where(a => a.Id == id)
+                 .Select(s => new LibraryModel()
+                 {
+                     Id = s.Id,
+                     Name = s.Name
+                 }).FirstOrDefault();
+            return View(library);
+
+        }
+
+        [HttpPost]
+        public async Task<RedirectResult> DeleteLibraryOnPost(int id)
+        {
+
+
+            var library = await _context.Libraries.FindAsync(id);
+            _context.Libraries.Remove(library);
+            await _context.SaveChangesAsync();
+
+
+
+            return Redirect(@"~/Book/LibraryList");
+        }
+        #endregion
+
+
+        #region Edit Library
+
+
+
+        [HttpGet]
+        public IActionResult UpdateLibrary(int id)
+        {
+
+
+
+            var library = _context.Libraries
+                .Where(l => l.Id == id)
+                 .Select(s => new LibraryModel()
+                 {
+                     Id = s.Id,
+                     Name = s.Name,
+                     Address = s.Address
+
+
+                 }).FirstOrDefault();
+
+            return View(library);
+
+
+
+
+        }
+
+        [HttpPost]
+        public async Task<RedirectResult> UpdateLibraryOnPost(int id, string name, string address)
+        {
+
+
+            var library = await _context.Libraries.FindAsync(id);
+            if (library != null)
+            {
+                library.Name = name;
+                library.Address = address;
+            }
+
+            await _context.SaveChangesAsync();
+
+
+            return Redirect(@"~/Book/LibraryList");
+
+        }
+
+        #endregion
+
+
+        #endregion
+
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrudTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220623103717_init")]
+    [Migration("20220626062524_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,21 @@ namespace CrudTest.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookModelLibraryModel", b =>
+                {
+                    b.Property<int>("BookModelsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibraryModelsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookModelsId", "LibraryModelsId");
+
+                    b.HasIndex("LibraryModelsId");
+
+                    b.ToTable("BookModelLibraryModel");
+                });
 
             modelBuilder.Entity("CrudTest.Models.AuthorModel", b =>
                 {
@@ -77,6 +92,44 @@ namespace CrudTest.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Book", "Book");
+                });
+
+            modelBuilder.Entity("CrudTest.Models.LibraryModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("LibraryId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Libraries");
+                });
+
+            modelBuilder.Entity("BookModelLibraryModel", b =>
+                {
+                    b.HasOne("CrudTest.Models.BookModel", null)
+                        .WithMany()
+                        .HasForeignKey("BookModelsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CrudTest.Models.LibraryModel", null)
+                        .WithMany()
+                        .HasForeignKey("LibraryModelsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CrudTest.Models.BookModel", b =>

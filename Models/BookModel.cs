@@ -13,12 +13,12 @@ namespace CrudTest.Models
     {
 
         public event QuantityHandler quantityHandler;
-       // [Required]
+        // [Required]
 
         [Key]
         [Column("BookId")]
         public int Id { get; set; }
- 
+
 
         [Required]
         [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
@@ -37,17 +37,24 @@ namespace CrudTest.Models
         [MaxLength(50, ErrorMessage = "The Publisher cannot Be more than atleast 20 charaters")]
         public string Publisher { get; set; }
 
-
+        #region Navigation props
         [ForeignKey("AuthorModel")]
         public int AuthorId { get; set; }
 
         public AuthorModel AuthorModel { get; set; }
 
+
+        public virtual ICollection<LibraryModel> LibraryModels { get; set; }
+
+        #endregion
+
+
+
         private int quantity;
 
 
         [Required]
-        [Range(0,99999)]
+        [Range(0, 99999)]
         public int Quantity
         {
             get { return quantity; }

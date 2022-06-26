@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrudTest.Models
 {
-    [Table("Author", Schema = "Person")]
-    public class AuthorModel
+    public class LibraryModel
     {
         [Key]
-        [Column("BookId")]
+        [Column("LibraryId")]
         public int Id { get; set; }
+
 
         [Required]
         [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
@@ -16,7 +16,13 @@ namespace CrudTest.Models
         public string Name { get; set; }
 
 
-        public ICollection<BookModel> BookModels { get; set; }
+        [Required]
+        [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
+        public string Address { get; set; }
+
+        public virtual ICollection<BookModel> BookModels { get; set; }
+
+        public List<BookModel> bookModels;
 
     }
 }
