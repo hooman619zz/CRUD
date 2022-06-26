@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrudTest.Models
 {
-    [Table("Author", Schema = "Person")]
+    [Table("Book", Schema = "Person")]
     public class AuthorModel
     {
         [Key]
