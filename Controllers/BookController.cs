@@ -47,7 +47,8 @@ namespace CrudTest.Controllers
                 Publisher = publisher,
                 AuthorModel = author,
                 AuthorId = authorId,
-                Quantity = quantity
+                Quantity = quantity,
+                IsDeleted = false
             };
 
             await _context.Books.AddAsync(book);
@@ -62,11 +63,22 @@ namespace CrudTest.Controllers
 
 
         #region Read
-        public async Task<IActionResult> ReadBooks()
+        public async Task<IActionResult> ReadBooks(int? id)
         {
+            if (id != null)
+            {
+                var books = await _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
+                                  .Select(s => s.BookModels).SingleOrDefaultAsync();
+                return View(books);
 
-            var Books = await _context.Books.ToListAsync();
-            return View(Books);
+
+            }
+            else
+            {
+                var Books = await _context.Books.ToListAsync();
+                return View(Books);
+            }
+
         }
         #endregion
 
@@ -100,13 +112,13 @@ namespace CrudTest.Controllers
         }
 
         [HttpPost]
-        public async Task<RedirectResult> DeleteBooksOnPost(int id)
+        public RedirectResult DeleteBooksOnPost(int id)
         {
 
 
-            var book = await _context.Books.FindAsync(id);
+            var book = _context.Books.Find(id);
             _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
 
 
@@ -199,7 +211,8 @@ namespace CrudTest.Controllers
         {
             AuthorModel author = new AuthorModel()
             {
-                Name = name
+                Name = name,
+                IsDeleted = false
             };
 
 
@@ -234,13 +247,13 @@ namespace CrudTest.Controllers
         }
 
         [HttpPost]
-        public async Task<RedirectResult> DeletAuthorOnPost(int id)
+        public RedirectResult DeletAuthorOnPost(int id)
         {
 
 
-            var author = await _context.Authors.FindAsync(id);
+            var author = _context.Authors.Find(id);
             _context.Authors.Remove(author);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
 
 
@@ -261,7 +274,6 @@ namespace CrudTest.Controllers
 
 
         #endregion
-
 
 
         #region Library
@@ -306,6 +318,8 @@ namespace CrudTest.Controllers
 
             return Redirect(@"~/Book/LibraryList");
         }
+
+
 
         #endregion
 

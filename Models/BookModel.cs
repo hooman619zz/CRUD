@@ -9,11 +9,10 @@ namespace CrudTest.Models
 
 
     [Table("Book", Schema = "Book")]
-    public class BookModel
+    public class BookModel : ISoftDelete
     {
 
         public event QuantityHandler quantityHandler;
-        // [Required]
 
         [Key]
         [Column("BookId")]
@@ -48,6 +47,7 @@ namespace CrudTest.Models
 
         #endregion
 
+        public bool IsDeleted { get; set; }
 
 
         private int quantity;

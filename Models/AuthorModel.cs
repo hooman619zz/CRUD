@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CrudTest.Models
 {
     [Table("Book", Schema = "Person")]
-    public class AuthorModel
+    public class AuthorModel : ISoftDelete
     {
         [Key]
         [Column("BookId")]
@@ -17,6 +17,9 @@ namespace CrudTest.Models
 
 
         public ICollection<BookModel> BookModels { get; set; }
+
+        public bool IsDeleted { get; set; }
+
 
     }
 }
