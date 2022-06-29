@@ -105,7 +105,7 @@ namespace CrudTest.Controllers
                      Quantity = s.Quantity,
 
 
-                 }).FirstOrDefault();
+                 }).IgnoreQueryFilters().FirstOrDefault();
             return View(book);
 
 
@@ -151,7 +151,7 @@ namespace CrudTest.Controllers
                      Quantity = s.Quantity,
 
 
-                 }).FirstOrDefault();
+                 }).IgnoreQueryFilters().FirstOrDefault();
             var authors = _context.Authors.ToList();
 
             BookListViewModel bookListViewModel = new BookListViewModel()
