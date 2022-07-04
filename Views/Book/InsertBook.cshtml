@@ -20,16 +20,16 @@
 
         <div class="form-group col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-6 offset-xs-3">
             <label for="name">name:</label><br>
-            <input type="text" class="form-control" id="name" name="name" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=50  oninvalid="alert('Name Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" required><br>
+            <input type="text" class="form-control" id="bookModel.name" name="bookModel.name" pattern=[a-zA-Z\s0-9]{3,20}$ maxlength=50  oninvalid="alert('Name Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" required><br>
 
             <label for="isbn">isbn:</label><br>
-            <input type="text" class="form-control" id="isbn" name="isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50  required ><br>
+            <input type="text" class="form-control" id="bookModel.isbn" name="bookModel.isbn" oninvalid="alert('Isbn Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50  required ><br>
 
             <label for="publisher">publisher:</label><br>
-            <input type="text" class="form-control" id="publisher" name="publisher"  oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');"pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 required><br>
+            <input type="text" class="form-control" id="bookModel.publisher" name="bookModel.publisher"  oninvalid="alert('Publisher Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');"pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 required><br>
 
             <label for="authorId"> author:</label><br>
-            <select id="authorId" name="authorId" required>
+            <select id="bookModel.authorId" name="bookModel.authorId" required>
                @foreach (var item in Model.AuthorModel)
                 {
 
@@ -48,7 +48,7 @@
 
 
             <label for="Quantity">Quantity:</label><br>
-            <input type="text" class="form-control" id="quantity" name="quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-99999 vared shavadad');"pattern=[0-9]{1,5} maxlength=5 required><br>
+            <input type="text" class="form-control" id="bookModel.quantity" name="bookModel.quantity" oninvalid="alert('Quantity Bayad beyne aadad 0-99999 vared shavadad');"pattern=[0-9]{1,5} maxlength=5 required><br>
             <br>
             <br>
 

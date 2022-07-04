@@ -2,6 +2,7 @@
 using CrudTest.Models;
 using CrudTest.Data;
 using Microsoft.EntityFrameworkCore;
+using CrudTest.Repository;
 
 namespace CrudTest.Controllers
 {
@@ -9,10 +10,18 @@ namespace CrudTest.Controllers
     {
         #region ctor + jections
         private ApplicationDbContext _context;
+
+        private BookRepository bookRepository;
+        private AuthorRepository authorRepository;
+        private LibraryRepository libraryRepository;
         public BookController(ApplicationDbContext context)
         {
             _context = context;
+            bookRepository = new BookRepository(context);
+            authorRepository = new AuthorRepository(context);
+            libraryRepository = new LibraryRepository(context);
         }
+
         #endregion
 
 
@@ -23,36 +32,17 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult InsertBook()
         {
-            var authors = _context.Authors.ToList();
-            var libraries = _context.Libraries.ToList();
-            BookListViewModel bookListViewModel = new BookListViewModel()
-            {
-                AuthorModel = authors,
-                LibraryModel = libraries
-            };
-            return View(bookListViewModel);
+            return View(bookRepository.InsertBookOnGet());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<RedirectResult> InsertBook(string name, string isbn, string publisher, int authorId, int quantity)
+        public RedirectResult InsertBook(BookModel bookModel)
         {
-            var author = await _context.Authors.FindAsync(authorId);
 
-            BookModel book = new BookModel()
-            {
-                Name = name,
-                ISBN = isbn,
-                Publisher = publisher,
-                AuthorModel = author,
-                AuthorId = authorId,
-                Quantity = quantity,
-                IsDeleted = false
-            };
-
-            await _context.Books.AddAsync(book);
-            await _context.SaveChangesAsync();
+            bookRepository.InsertBookOnPost(bookModel);
+            bookRepository.Save();
 
 
             return Redirect(@"~/Book/ReadBooks");
@@ -63,22 +53,12 @@ namespace CrudTest.Controllers
 
 
         #region Read
-        public async Task<IActionResult> ReadBooks(int? id)
+        public IActionResult ReadBooks(int? id)
         {
-            if (id != null)
-            {
-                var books = await _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
-                                  .Select(s => s.BookModels).SingleOrDefaultAsync();
-                return View(books);
 
+            var books = bookRepository.ReadBooks(id);
 
-            }
-            else
-            {
-                var Books = await _context.Books.ToListAsync();
-                return View(Books);
-            }
-
+            return View(books);
         }
         #endregion
 
@@ -88,40 +68,14 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult DeleteBooks(int id)
         {
-
-
-
-            var book = _context.Books
-                .Where(b => b.Id == id)
-                 .Select(s => new BookModel()
-                 {
-
-                     Id = s.Id,
-                     Name = s.Name,
-                     AuthorId = s.AuthorId,
-                     AuthorModel = s.AuthorModel,
-                     Publisher = s.Publisher,
-                     ISBN = s.ISBN,
-                     Quantity = s.Quantity,
-
-
-                 }).IgnoreQueryFilters().FirstOrDefault();
-            return View(book);
-
-
+            return View(bookRepository.DeleteBookOnGet(id));
         }
 
         [HttpPost]
         public RedirectResult DeleteBooksOnPost(int id)
         {
-
-
-            var book = _context.Books.Find(id);
-            _context.Books.Remove(book);
-            _context.SaveChanges();
-
-
-
+            bookRepository.DeleteBooksOnPost(id);
+            bookRepository.Save();
             return Redirect(@"~/Book/ReadBooks");
         }
 
@@ -135,54 +89,20 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult OnGet(int id)
         {
-
-
-
-            var book = _context.Books
-                .Where(b => b.Id == id)
-                 .Select(s => new BookModel()
-                 {
-                     Id = s.Id,
-                     Name = s.Name,
-                     AuthorId = s.AuthorId,
-                     AuthorModel = s.AuthorModel,
-                     Publisher = s.Publisher,
-                     ISBN = s.ISBN,
-                     Quantity = s.Quantity,
-
-
-                 }).IgnoreQueryFilters().FirstOrDefault();
-            var authors = _context.Authors.ToList();
-
-            BookListViewModel bookListViewModel = new BookListViewModel()
-            {
-                BookModel = book,
-                AuthorModel = authors
-            };
-
-            return View(bookListViewModel);
-
-
-
-
+            return View(bookRepository.UpdateBookOnGet(id));
         }
 
         [HttpPost]
-        public async Task<RedirectResult> OnPost(int id, string name, string isbn, string publisher, int authorId, int quantity)
+        public RedirectResult OnPost(BookModel bookModel)
         {
 
 
-            var book = await _context.Books.FindAsync(id);
-            if (book != null)
+            if (bookModel != null)
             {
-                book.Name = name;
-                book.ISBN = isbn;
-                book.Publisher = publisher;
-                book.AuthorId = authorId;
-                book.Quantity = quantity;
+                bookRepository.UpdateBookOnPost(bookModel);
             }
 
-            await _context.SaveChangesAsync();
+            bookRepository.Save();
 
 
             return Redirect(@"~/Book/ReadBooks");
@@ -207,20 +127,10 @@ namespace CrudTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<RedirectResult> AddAuthor(string name)
+        public RedirectResult AddAuthor(AuthorModel authorModel)
         {
-            AuthorModel author = new AuthorModel()
-            {
-                Name = name,
-                IsDeleted = false
-            };
-
-
-
-            await _context.Authors.AddAsync(author);
-            await _context.SaveChangesAsync();
-
-
+            authorRepository.InsertAuthorOnPost(authorModel);
+            authorRepository.Save();
             return Redirect(@"~/Book/AuthorList");
         }
 
@@ -235,28 +145,16 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult DeleteAuthor(int id)
         {
-            var author = _context.Authors
-                .Where(a => a.Id == id)
-                 .Select(s => new AuthorModel()
-                 {
-                     Id = s.Id,
-                     Name = s.Name
-                 }).FirstOrDefault();
-            return View(author);
+
+            return View(authorRepository.DeleteAuthorOnGet(id));
 
         }
 
         [HttpPost]
         public RedirectResult DeletAuthorOnPost(int id)
         {
-
-
-            var author = _context.Authors.Find(id);
-            _context.Authors.Remove(author);
-            _context.SaveChanges();
-
-
-
+            authorRepository.DeletAuthorOnPost(id);
+            authorRepository.Save();
             return Redirect(@"~/Book/AuthorList");
         }
 
@@ -264,11 +162,9 @@ namespace CrudTest.Controllers
 
 
         #region Author List
-        public async Task<IActionResult> AuthorList()
+        public ActionResult AuthorList()
         {
-
-            var authors = await _context.Authors.ToListAsync();
-            return View(authors);
+            return View(authorRepository.AuthorList());
         }
         #endregion
 
@@ -284,39 +180,18 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult AddLibrary()
         {
-            var books = _context.Books.ToList();
-            return View(books);
+            return View(libraryRepository.InsertLibraryOnGet());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<RedirectResult> AddLibraryOnPost(string name, string address, int[] arrays)
+        public RedirectResult AddLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
-            List<BookModel> books = new List<BookModel>();
-            for (int i = 0; i < arrays.Count(); i++)
-            {
-                BookModel book = _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefault();
-                books.Add(book);
-            }
 
-
-
-            LibraryModel libraryModel = new LibraryModel()
-            {
-
-                Name = name,
-                Address = address,
-                BookModels = books
-
-            };
-
-
-
-            await _context.Libraries.AddAsync(libraryModel);
-            await _context.SaveChangesAsync();
-
-
+            libraryRepository.InsertLibraryOnPost(libraryModel, arrays);
+            libraryRepository.Save();
             return Redirect(@"~/Book/LibraryList");
+
         }
 
 
@@ -328,8 +203,8 @@ namespace CrudTest.Controllers
         public async Task<IActionResult> LibraryList()
         {
 
-            var libraries = await _context.Libraries.ToListAsync();
-            return View(libraries);
+            return View(libraryRepository.LibraryList());
+
         }
         #endregion
 
@@ -338,28 +213,14 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult DeleteLibrary(int id)
         {
-            var library = _context.Libraries
-                .Where(a => a.Id == id)
-                 .Select(s => new LibraryModel()
-                 {
-                     Id = s.Id,
-                     Name = s.Name
-                 }).FirstOrDefault();
-            return View(library);
-
+            return View(libraryRepository.DeleteLibraryOnGet(id));
         }
 
         [HttpPost]
         public async Task<RedirectResult> DeleteLibraryOnPost(int id)
         {
-
-
-            var library = await _context.Libraries.FindAsync(id);
-            _context.Libraries.Remove(library);
-            await _context.SaveChangesAsync();
-
-
-
+            libraryRepository.DeleteLibraryOnPost(id);
+            libraryRepository.Save();
             return Redirect(@"~/Book/LibraryList");
         }
         #endregion
@@ -372,40 +233,15 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult UpdateLibrary(int id)
         {
-
-
-
-            var library = _context.Libraries
-                .Where(l => l.Id == id)
-                 .Select(s => new LibraryModel()
-                 {
-                     Id = s.Id,
-                     Name = s.Name,
-                     Address = s.Address
-
-
-                 }).FirstOrDefault();
-
-            return View(library);
-
-
-
-
+            return View(libraryRepository.UpdateLibraryOnGet(id));
         }
 
         [HttpPost]
-        public async Task<RedirectResult> UpdateLibraryOnPost(int id, string name, string address)
+        public RedirectResult UpdateLibraryOnPost(LibraryModel libraryModel)
         {
 
-
-            var library = await _context.Libraries.FindAsync(id);
-            if (library != null)
-            {
-                library.Name = name;
-                library.Address = address;
-            }
-
-            await _context.SaveChangesAsync();
+            libraryRepository.UpdateLibraryOnPost(libraryModel);
+            libraryRepository.Save();
 
 
             return Redirect(@"~/Book/LibraryList");

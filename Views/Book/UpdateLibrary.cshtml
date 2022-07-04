@@ -22,13 +22,13 @@
         <div class="form-group col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-6 offset-xs-3">
 
 
-            <input type="hidden" asp-for=@Model.Id name="id" id="id"/>
+            <input type="hidden" asp-for=@Model.Id name="libraryModel.id" id="libraryModel.id"/>
             <label for="name">name:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Name id="name" name="name" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 oninvalid="alert('Name  Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" required><br>
+            <input type="text" class="form-control" asp-for=@Model.Name id="libraryModel.name" name="libraryModel.name" pattern=[a-zA-Z\s0-9]{1,50}$ maxlength=50 oninvalid="alert('Name  Bayad beyne horoof a-z va aadad 0-9 va beyne 1-50 char vared shavad');" required><br>
 
 
             <label for="isbn">isbn:</label><br>
-            <input type="text" class="form-control" asp-for=@Model.Address id="address" name="address" required oninvalid="alert('Address Bayad vared shavad');" pattern=[a-zA-Z\s0-9]{1,1000}$ ><br>
+            <input type="text" class="form-control" asp-for=@Model.Address id="libraryModel.address" name="libraryModel.address" required oninvalid="alert('Address Bayad vared shavad');" pattern=[a-zA-Z\s0-9]{1,1000}$ ><br>
            
 
 
