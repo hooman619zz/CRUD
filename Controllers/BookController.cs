@@ -9,17 +9,17 @@ namespace CrudTest.Controllers
     public class BookController : Controller
     {
         #region ctor + jections
-        private ApplicationDbContext _context;
+        //private ApplicationDbContext _context;
 
         private BookRepository bookRepository;
         private AuthorRepository authorRepository;
         private LibraryRepository libraryRepository;
-        public BookController(ApplicationDbContext context)
+        public BookController()
         {
-            _context = context;
-            bookRepository = new BookRepository(context);
-            authorRepository = new AuthorRepository(context);
-            libraryRepository = new LibraryRepository(context);
+            //_context = context;
+            bookRepository = new BookRepository(new ApplicationDbContext());
+            authorRepository = new AuthorRepository(new ApplicationDbContext());
+            libraryRepository = new LibraryRepository(new ApplicationDbContext());
         }
 
         #endregion
@@ -87,13 +87,13 @@ namespace CrudTest.Controllers
 
 
         [HttpGet]
-        public IActionResult OnGet(int id)
+        public IActionResult UpdateBookOnGet(int id)
         {
             return View(bookRepository.UpdateBookOnGet(id));
         }
 
         [HttpPost]
-        public RedirectResult OnPost(BookModel bookModel)
+        public RedirectResult UpdateBookOnPost(BookModel bookModel)
         {
 
 

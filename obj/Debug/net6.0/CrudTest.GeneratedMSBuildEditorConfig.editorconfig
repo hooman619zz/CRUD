@@ -47,12 +47,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xMaWJyYXJ5TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/OnGet.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xPbkdldC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/ReadBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xSZWFkQm9va3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/UpdateBookOnGet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xVcGRhdGVCb29rT25HZXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/UpdateLibrary.cshtml]
