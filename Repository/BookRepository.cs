@@ -22,10 +22,10 @@ namespace CrudTest.Repository
 
         #region insert book
 
-        public BookListViewModel InsertBookOnGet()
+        public async Task<BookListViewModel> InsertBookOnGet()
         {
-            var authors = _context.Authors.ToList();
-            var libraries = _context.Libraries.ToList();
+            var authors = await _context.Authors.ToListAsync();
+            var libraries = await _context.Libraries.ToListAsync();
             BookListViewModel bookListViewModel = new BookListViewModel()
             {
                 AuthorModel = authors,
@@ -44,27 +44,52 @@ namespace CrudTest.Repository
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ICollection<BookModel> ReadBooks(int? id)
+        public List<BookAuthorViewModel> ReadBooks(int? id)
         {
+            List<BookAuthorViewModel> bookAuthorViewModels = new List<BookAuthorViewModel>();
             if (id != null)
             {
-                var books = _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
+                var Books = _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
                                   .Select(s => s.BookModels).SingleOrDefault();
-                return books;
+                foreach (var item in Books)
+                {
+                    var authorModel = _context.Authors.Where(a => a.Id == item.AuthorId).IgnoreQueryFilters().FirstOrDefault();
+                    BookAuthorViewModel bookAuthorViewModel = new BookAuthorViewModel()
+                    {
+                        books = item,
+                        author = authorModel
+                    };
+                    bookAuthorViewModels.Add(bookAuthorViewModel);
+                }
 
+                return bookAuthorViewModels;
 
             }
             else
             {
                 var Books = _context.Books.ToList();
-                return Books;
+                foreach (var item in Books)
+                {
+                    var authorModel = _context.Authors.Where(a => a.Id == item.AuthorId).IgnoreQueryFilters().FirstOrDefault();
+
+                    BookAuthorViewModel bookAuthorViewModel = new BookAuthorViewModel()
+                    {
+                        books = item,
+                        author = authorModel
+
+                    };
+                    bookAuthorViewModels.Add(bookAuthorViewModel);
+
+                }
+
+                return bookAuthorViewModels;
             }
         }
         #endregion
         #region save
-        public void Save()
+        public  void Save()
         {
-            _context.SaveChanges();
+             _context.SaveChanges();
         }
 
 
@@ -119,9 +144,9 @@ namespace CrudTest.Repository
         }
         #endregion
         #region Delete
-        public BookModel DeleteBookOnGet(int id)
+        public async Task<BookModel> DeleteBookOnGet(int id)
         {
-            var book = _context.Books
+            var book = await _context.Books
                     .Where(b => b.Id == id)
                      .Select(s => new BookModel()
                      {
@@ -135,13 +160,13 @@ namespace CrudTest.Repository
                          Quantity = s.Quantity,
 
 
-                     }).IgnoreQueryFilters().FirstOrDefault();
+                     }).IgnoreQueryFilters().FirstOrDefaultAsync();
             return book;
         }
 
         public void DeleteBooksOnPost(int id)
         {
-            var book = _context.Books.Find(id);
+            var book =  _context.Books.Find(id);
             _context.Books.Remove(book);
         }
         #endregion

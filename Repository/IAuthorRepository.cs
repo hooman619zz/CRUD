@@ -6,7 +6,7 @@ namespace CrudTest.Repository
     {
         public void InsertAuthorOnPost(AuthorModel authorModel);
 
-        public AuthorModel DeleteAuthorOnGet(int id);
+        public Task<AuthorModel> DeleteAuthorOnGet(int id);
 
         public List<AuthorModel> AuthorList();
         public void DeletAuthorOnPost(int id);

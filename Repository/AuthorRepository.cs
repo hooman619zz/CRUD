@@ -18,7 +18,7 @@ namespace CrudTest.Repository
         #region Insert Author
         public void InsertAuthorOnPost(AuthorModel authorModel)
         {
-            _context.Authors.Add(authorModel);
+            _context.Authors.AddAsync(authorModel);
         }
         #endregion
         #region Save
@@ -28,15 +28,15 @@ namespace CrudTest.Repository
         }
         #endregion
         #region Delete Author
-        public AuthorModel DeleteAuthorOnGet(int id)
+        public async Task<AuthorModel> DeleteAuthorOnGet(int id)
         {
-            var author = _context.Authors
+            var author = await _context.Authors
                     .Where(a => a.Id == id)
                      .Select(s => new AuthorModel()
                      {
                          Id = s.Id,
                          Name = s.Name
-                     }).FirstOrDefault();
+                     }).FirstOrDefaultAsync();
             return author;
         }
         public void DeletAuthorOnPost(int id)
