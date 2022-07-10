@@ -30,6 +30,7 @@ namespace CrudTest.Controllers
         #region AddLibrary
 
         [HttpGet]
+        [Authorize(Trust = "yes")]
         public IActionResult AddLibrary()
         {
             return View(libraryRepository.InsertLibraryOnGet());
@@ -63,6 +64,7 @@ namespace CrudTest.Controllers
 
         #region Delete Library
         [HttpGet]
+        [Authorize(Trust = "yes")]
         public IActionResult DeleteLibrary(int id)
         {
             return View(libraryRepository.DeleteLibraryOnGet(id));
@@ -83,6 +85,7 @@ namespace CrudTest.Controllers
 
 
         [HttpGet]
+        [Authorize(Trust = "yes")]
         public IActionResult UpdateLibrary(int id)
         {
             return View(libraryRepository.UpdateLibraryOnGet(id));

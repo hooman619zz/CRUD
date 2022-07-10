@@ -30,6 +30,7 @@ namespace CrudTest.Controllers
 
         #region Add Author
         [HttpGet]
+        [Authorize(Trust = "yes")]
         public IActionResult AddAuthor()
         {
             return View();
@@ -53,6 +54,7 @@ namespace CrudTest.Controllers
 
         #region Delete Author
         [HttpGet]
+        [Authorize(Trust = "yes")]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
 

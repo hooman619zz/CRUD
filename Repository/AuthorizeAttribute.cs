@@ -18,7 +18,7 @@ namespace CrudTest.Repository
 
             if (Trust != trust)
             {
-                context.Result = new RedirectResult("/Account/AccessDenied");
+                context.Result = new RedirectResult("/Account/LoginOnGet");
             }
         }
 

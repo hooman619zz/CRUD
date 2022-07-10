@@ -63,10 +63,6 @@ namespace CrudTest.Controllers
         }
         #endregion
 
-        public string AccessDenied()
-        {
-            return "shoma nemitavanid b inja dastresi dashte bashid !";
-        }
 
     }
 }
