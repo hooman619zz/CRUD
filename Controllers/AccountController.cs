@@ -49,7 +49,7 @@ namespace CrudTest.Controllers
             var users = _context.Users.ToList();
             foreach (var item in users)
             {
-                if (user.UserName == item.UserName && user.Password == user.Password)
+                if (user.UserName == item.UserName && user.Password == item.Password)
                 {
                     CookieOptions myCookie = new CookieOptions();
                     Response.Cookies.Append("Token", "yes", myCookie);
@@ -62,6 +62,11 @@ namespace CrudTest.Controllers
 
         }
         #endregion
+
+        public string AccessDenied()
+        {
+            return "shoma nemitavanid b inja dastresi dashte bashid !";
+        }
 
     }
 }
