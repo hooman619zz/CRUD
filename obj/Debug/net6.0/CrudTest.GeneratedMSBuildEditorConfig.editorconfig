@@ -15,6 +15,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Hooman\Desktop\CrudTest MVC\CrudTest
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Account/LoginOnGet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbk9uR2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Account/RegisterOnGet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlck9uR2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Author/AddAuthor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEFkZEF1dGhvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -27,8 +27,8 @@ namespace CrudTest.Controllers
 
         #region Book
 
-
         #region Insert
+        [Authorize(Trust = "yes")]
         [HttpGet]
         public async Task<IActionResult> InsertBook()
         {
@@ -63,7 +63,7 @@ namespace CrudTest.Controllers
 
 
         #region Delete
-
+        [Authorize(Trust = "yes")]
         [HttpGet]
         public async Task<IActionResult> DeleteBooks(int id)
         {
@@ -84,7 +84,7 @@ namespace CrudTest.Controllers
         #region Edit
 
 
-
+        [Authorize(Trust = "yes")]
         [HttpGet]
         public IActionResult UpdateBookOnGet(int id)
         {

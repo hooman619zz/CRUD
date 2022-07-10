@@ -9,6 +9,7 @@ namespace CrudTest.Data
         public DbSet<BookModel> Books { get; set; }
         public DbSet<AuthorModel> Authors { get; set; }
         public DbSet<LibraryModel> Libraries { get; set; }
+        public DbSet<UserModel> Users { get; set; }
         #endregion
 
 
