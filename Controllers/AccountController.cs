@@ -9,13 +9,13 @@ namespace CrudTest.Controllers
     public class AccountController : Controller
     {
         #region ctor
-        private ApplicationDbContext _context;
 
-        public AccountController(ApplicationDbContext applicationDbContext)
+        public IUserRepository userRepository;
+        public AccountController()
         {
-            this._context = applicationDbContext;
-
+            this.userRepository = new UserRepository(new ApplicationDbContext());
         }
+
         #endregion
 
 
@@ -23,15 +23,16 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult RegisterOnGet()
         {
+            if (TempData["LoginMessage"] != null)
+                ViewBag.Message = TempData["LoginMessage"].ToString();
             return View();
         }
 
         [HttpPost]
         public RedirectResult RegisterOnPost(UserModel user)
         {
-            string s = user.UserName;
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            userRepository.InsertUserOnPost(user);
+            userRepository.Save();
             return Redirect(@"~/Home/Index");
         }
         #endregion
@@ -40,27 +41,39 @@ namespace CrudTest.Controllers
         #region Login
         public IActionResult LoginOnGet()
         {
-            return View();
+            if (Request.Cookies["Token"] != null)
+            {
+                Response.Cookies.Delete("Token");
+                return Redirect(@"~/Home/Index");
+            }
+            else
+                return View();
         }
 
         [HttpPost]
         public RedirectResult LoginOnPost(UserModel user)
         {
-            var users = _context.Users.ToList();
+            var users = userRepository.UserList();
             foreach (var item in users)
             {
                 if (user.UserName == item.UserName && user.Password == item.Password)
                 {
+
                     CookieOptions myCookie = new CookieOptions();
                     Response.Cookies.Append("Token", "yes", myCookie);
                     return Redirect(@"~/Home/Index");
 
                 }
+                else
+                    TempData["LoginMessage"] = "Account Peyda nashod ! hamin hala sabte nam konid";
+
 
             }
-            return Redirect(@"~/Account/LoginOnGet");
+            return Redirect(@"~/Account/RegisterOnGet");
 
         }
+
+
         #endregion
 
 
