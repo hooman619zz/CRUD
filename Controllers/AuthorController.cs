@@ -11,7 +11,7 @@ namespace CrudTest.Controllers
 
         #region ctor + jections
 
-        private AuthorRepository authorRepository;
+        private IAuthorRepository authorRepository;
         public AuthorController(ApplicationDbContext context)
         {
             authorRepository = new AuthorRepository(context);

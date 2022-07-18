@@ -10,7 +10,7 @@ namespace CrudTest.Controllers
     {
         #region ctor + jections
 
-        private LibraryRepository libraryRepository;
+        private ILibraryRepository libraryRepository;
         public LibraryController(ApplicationDbContext context)
         {
             libraryRepository = new LibraryRepository(context);
