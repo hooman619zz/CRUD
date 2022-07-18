@@ -112,7 +112,7 @@ namespace CrudTest.Repository
 
 
                              }).IgnoreQueryFilters().FirstOrDefault();
-            var authors = _context.Authors.IgnoreQueryFilters().ToList();
+            var authors = _context.Authors.ToList();
 
             BookListViewModel bookListViewModel = new BookListViewModel()
             {

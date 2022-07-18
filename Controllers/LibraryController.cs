@@ -9,16 +9,10 @@ namespace CrudTest.Controllers
     public class LibraryController : Controller
     {
         #region ctor + jections
-        private ApplicationDbContext _context;
 
-        private BookRepository bookRepository;
-        private AuthorRepository authorRepository;
         private LibraryRepository libraryRepository;
         public LibraryController(ApplicationDbContext context)
         {
-            _context = context;
-            bookRepository = new BookRepository(context);
-            authorRepository = new AuthorRepository(context);
             libraryRepository = new LibraryRepository(context);
         }
 
@@ -31,9 +25,9 @@ namespace CrudTest.Controllers
 
         [HttpGet]
         [Authorize(Trust = "yes")]
-        public IActionResult AddLibrary()
+        public async Task<IActionResult> AddLibrary()
         {
-            return View(libraryRepository.InsertLibraryOnGet());
+            return View(await libraryRepository.InsertLibraryOnGet());
         }
 
         [HttpPost]
@@ -56,7 +50,7 @@ namespace CrudTest.Controllers
         public async Task<IActionResult> LibraryList()
         {
 
-            return View(libraryRepository.LibraryList());
+            return View(await libraryRepository.LibraryList());
 
         }
         #endregion

@@ -9,17 +9,12 @@ namespace CrudTest.Controllers
     public class BookController : Controller
     {
         #region ctor + jections
-        //private ApplicationDbContext _context;
 
         private BookRepository bookRepository;
-        private AuthorRepository authorRepository;
-        private LibraryRepository libraryRepository;
+
         public BookController()
         {
-            //_context = context;
             bookRepository = new BookRepository(new ApplicationDbContext());
-            authorRepository = new AuthorRepository(new ApplicationDbContext());
-            libraryRepository = new LibraryRepository(new ApplicationDbContext());
         }
 
         #endregion

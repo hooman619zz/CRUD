@@ -7,12 +7,14 @@ namespace CrudTest.Repository
 {
     public class LibraryRepository : ILibraryRepository
     {
+        #region ctor
         private ApplicationDbContext _context;
 
         public LibraryRepository(ApplicationDbContext applicationDbContext)
         {
             this._context = applicationDbContext;
         }
+        #endregion
         #region Save
         public void Save()
         {
@@ -20,9 +22,9 @@ namespace CrudTest.Repository
         }
         #endregion
         #region Add Library
-        public List<BookModel> InsertLibraryOnGet()
+        public async Task<List<BookModel>> InsertLibraryOnGet()
         {
-            var books = _context.Books.ToList();
+            var books = await _context.Books.ToListAsync();
             return books;
         }
         public void InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays)
@@ -44,9 +46,9 @@ namespace CrudTest.Repository
 
         #endregion
         #region Library List
-        public List<LibraryModel> LibraryList()
+        public async Task<List<LibraryModel>> LibraryList()
         {
-            var libraries =  _context.Libraries.ToList();
+            var libraries =  await _context.Libraries.ToListAsync();
             return libraries;
         }
         #endregion

@@ -4,13 +4,13 @@ namespace CrudTest.Repository
 {
     public interface ILibraryRepository
     {
-        public List<BookModel> InsertLibraryOnGet();
+        public Task<List<BookModel>> InsertLibraryOnGet();
 
         public void InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays);
 
         public void Save();
 
-        public List<LibraryModel> LibraryList();
+        public Task<List<LibraryModel>> LibraryList();
 
         public LibraryModel DeleteLibraryOnGet(int id);
         public void DeleteLibraryOnPost(int id);
