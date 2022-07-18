@@ -11,9 +11,9 @@ namespace CrudTest.Controllers
         #region ctor
 
         public IUserRepository userRepository;
-        public AccountController()
+        public AccountController(ApplicationDbContext context)
         {
-            this.userRepository = new UserRepository(new ApplicationDbContext());
+            this.userRepository = new UserRepository(context);
         }
 
         #endregion
