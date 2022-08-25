@@ -15,8 +15,8 @@ namespace CrudTest.Repository
         public LibraryModel DeleteLibraryOnGet(int id);
         public void DeleteLibraryOnPost(int id);
 
-        public LibraryModel UpdateLibraryOnGet(int id);
+        public LibraryBooksViewModel UpdateLibraryOnGet(int id);
 
-        public void UpdateLibraryOnPost(LibraryModel libraryModel);
+        public void UpdateLibraryOnPost(LibraryModel libraryModel, int[] arrays);
     }
 }

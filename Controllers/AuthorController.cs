@@ -47,16 +47,17 @@ namespace CrudTest.Controllers
 
 
         #region Delete Author
-        [HttpGet]
-        [Authorize(Trust = "yes")]
-        public async Task<IActionResult> DeleteAuthor(int id)
-        {
+        //[HttpGet]
+        //[Authorize(Trust = "yes")]
+        //public async Task<IActionResult> DeleteAuthor(int id)
+        //{
 
-            return View(await authorRepository.DeleteAuthorOnGet(id));
+        //    return View(await authorRepository.DeleteAuthorOnGet(id));
 
-        }
+        //}
 
         [HttpPost]
+        [Authorize(Trust = "yes")]
         public async Task<RedirectResult> DeletAuthorOnPost(int id)
         {
             await Task.Run(()=> authorRepository.DeletAuthorOnPost(id));
@@ -68,6 +69,7 @@ namespace CrudTest.Controllers
 
 
         #region Author List
+        [Authorize(Trust = "yes")]
         public ActionResult AuthorList()
         {
             return View(authorRepository.AuthorList());

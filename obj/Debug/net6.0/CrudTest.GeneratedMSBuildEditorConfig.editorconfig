@@ -8,89 +8,93 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CrudTest
 build_property.RootNamespace = CrudTest
-build_property.ProjectDir = C:\Users\Hooman\Desktop\CrudTest MVC\CrudTest\
+build_property.ProjectDir = C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Hooman\Desktop\CrudTest MVC\CrudTest
+build_property.MSBuildProjectDirectory = C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Account/LoginOnGet.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Account/LoginOnGet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbk9uR2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Account/RegisterOnGet.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Account/RegisterOnGet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlck9uR2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Author/AddAuthor.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Author/AddAuthor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEFkZEF1dGhvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Author/AuthorList.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Author/AuthorList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEF1dGhvckxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Author/DeleteAuthor.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Author/DeleteAuthor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXERlbGV0ZUF1dGhvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/DeleteBooks.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Book/BookById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xCb29rQnlJZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Book/DeleteBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZWxldGVCb29rcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/InsertBook.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Book/InsertBook.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xJbnNlcnRCb29rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/ReadBooks.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Book/ReadBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xSZWFkQm9va3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Book/UpdateBookOnGet.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Book/UpdateBookOnGet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xVcGRhdGVCb29rT25HZXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Home/Index.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Home/Privacy.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Library/AddLibrary.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Library/AddLibrary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxBZGRMaWJyYXJ5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Library/DeleteLibrary.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Library/DeleteLibrary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxEZWxldGVMaWJyYXJ5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Library/LibraryList.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Library/LibraryList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxMaWJyYXJ5TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Library/UpdateLibrary.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Library/UpdateLibrary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxVcGRhdGVMaWJyYXJ5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Shared/Error.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/_ViewImports.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/_ViewStart.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hooman/Desktop/CrudTest MVC/CrudTest/Views/Shared/_Layout.cshtml]
+[C:/Users/Hooman/Desktop/Start/CrudTest MVC/CrudTest/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qwkcojecxa

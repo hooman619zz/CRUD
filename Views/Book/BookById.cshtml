@@ -1,0 +1,56 @@
+﻿@model CrudTest.Models.BookModel
+@{
+    ViewData["Title"] = "BookById";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>FlexBox Learning</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Book.css">
+    <link href="accesskeyhttps://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="card text-black">
+                        <img src="/Logo.webp"
+                             class="card-img-top" alt="Apple Computer" />
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h5 class="card-title">Believing is seeing</h5>
+                                <p class="text-muted mb-4">Apple pro display XDR</p>
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Name</span><span>@Model.Name</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Publisher</span><span>@Model.Publisher</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>ISBN</span><span>@Model.ISBN</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Rate</span><span>@Model.Rate</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                                <span>Price </span><span>@Model.Price</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

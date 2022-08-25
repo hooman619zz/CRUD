@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hooman\\Desktop\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {}
+    "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hooman\\Desktop\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {
+    "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+        "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
         "projectName": "CrudTest",
-        "projectPath": "C:\\Users\\Hooman\\Desktop\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+        "projectPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
         "packagesPath": "C:\\Users\\Hooman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hooman\\Desktop\\CrudTest MVC\\CrudTest\\obj\\",
+        "outputPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hooman\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AspNet.ScriptManager.jQuery": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.6, )"
@@ -66,7 +74,11 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.6, )"
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.jQuery.Unobtrusive.Ajax": {
+              "target": "Package",
+              "version": "[3.2.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -75,6 +87,10 @@
             "bootstrap": {
               "target": "Package",
               "version": "[4.0.0, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.6.0, )"
             }
           },
           "imports": [
@@ -95,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.107\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.108\\RuntimeIdentifierGraph.json"
         }
       }
     }

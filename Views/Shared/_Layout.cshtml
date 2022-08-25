@@ -3,50 +3,75 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+    @*    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+        <link rel="stylesheet" href="~/css//Layout.css" />*@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CrudTest.styles.css" asp-append-version="true" />
+
+
+    <link rel="stylesheet" href="~/css/fonts.css">
+    <link rel="stylesheet" href="~/css/Reset.css">
+    <link rel="stylesheet" href="~/css//navbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CrudTest</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="InsertBook">Add Book</a>
+        <nav class="nav">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="logo">
+                        <img src="~/Logo.webp" alt="" class="logo__img">
+                    </div>
+                    <ul class="menu">
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-controller="Author" asp-action="AddAuthor">Add Author</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="ReadBooks">Book List</a>
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-controller="Author" asp-action="AuthorList">Author List </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="AddAuthor">Add Author</a>
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-controller="Book" asp-action="InsertBook">Add Book</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="AuthorList">Author List</a>
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-area="" asp-controller="Book" asp-action="ReadBooks">Book List</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Library" asp-action="AddLibrary">Add Library </a>
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-controller="Library" asp-action="AddLibrary">Add Library </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Library" asp-action="LibraryList">Library List </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LoginOnGet">Login/Logout </a>
+                        <li class="menu__item">
+                            <a class="menu__link" asp-area="" asp-controller="Library" asp-action="LibraryList">Library List </a>
                         </li>
 
 
 
 
+
+
+
+
+                        <li class="menu__item">
+                            <a id="a1" class="menu__link menu__link-active" asp-area="" asp-controller="Account" asp-action="LoginOnGet">Login </a>
+                        </li>
                     </ul>
+                    <span class="fas fa-bars nav__icon"></span>
                 </div>
             </div>
         </nav>
+
+
+
+
+
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -64,4 +89,39 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<script>
+        function ReadCookie() {
+                   var allcookies = document.cookie;
+                   // Get all the cookies pairs in an array
+                   cookiearray = allcookies.split(';');
+                   var name;
+                   var value;
+                   // Now take key value pair out of this array
+                   for(var i=0; i<cookiearray.length; i++) {
+                      name = cookiearray[i].split('=')[0];
+                      value = cookiearray[i].split('=')[1];
+                   }
+                                     if(value=="yes")
+                      {
+                          document.getElementById('a1').innerHTML="LogOut";
+                      }
+                }
+                ReadCookie();
+
+                let menu = document.querySelector(".menu");
+
+
+    let icon = document.querySelector(".nav__icon");
+
+    icon.addEventListener("click",function() {
+      if (this.classList.contains("fa-bars")){
+        this.classList = "fas fa-times nav__icon";
+        menu.style.left = 0;
+      } else {
+        this.classList = "fas fa-bars nav__icon";
+        menu.style.left = "-220px";
+      }
+
+    })
+</script>
 </html>

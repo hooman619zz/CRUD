@@ -15,6 +15,10 @@ namespace CrudTest.Controllers
 
         public IActionResult Index()
         {
+            string username;
+            username = TempData["UserName"]?.ToString();
+            if (username != null)
+                ViewBag.Username = username;
             return View();
         }
 

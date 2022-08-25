@@ -20,7 +20,7 @@ namespace CrudTest.Models
         [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
         public string Address { get; set; }
 
-        public virtual ICollection<BookModel> BookModels { get; set; }
+        public virtual List<BookModel> BookModels { get; set; }
 
         public List<BookModel> bookModels;
 

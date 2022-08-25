@@ -61,6 +61,7 @@ namespace CrudTest.Controllers
 
                     CookieOptions myCookie = new CookieOptions();
                     Response.Cookies.Append("Token", "yes", myCookie);
+                    TempData["UserName"] = $"{user.UserName}";
                     return Redirect(@"~/Home/Index");
 
                 }

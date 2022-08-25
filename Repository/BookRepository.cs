@@ -35,6 +35,11 @@ namespace CrudTest.Repository
         }
         public async void InsertBookOnPost(BookModel book)
         {
+            Random rnd = new Random();
+            int rate = rnd.Next(5);
+            int price = rnd.Next(1, 1000);
+            book.Rate = rate;
+            book.Price = price;
             await _context.Books.AddAsync(book);
         }
         #endregion
@@ -84,6 +89,12 @@ namespace CrudTest.Repository
 
                 return bookAuthorViewModels;
             }
+        }
+
+        public IEnumerable<BookModel> GetBooks()
+        {
+            var Books = _context.Books.ToList();
+            return Books;
         }
         #endregion
         #region save
@@ -169,6 +180,15 @@ namespace CrudTest.Repository
             var book =  _context.Books.Find(id);
             _context.Books.Remove(book);
         }
+        #endregion
+        #region BookById
+
+        public async Task<BookModel> GetBookById(int id)
+        {
+            BookModel? book = await _context.Books.Where(b => b.Id == id).SingleOrDefaultAsync();
+            return book;
+        }
+
         #endregion
     }
 }

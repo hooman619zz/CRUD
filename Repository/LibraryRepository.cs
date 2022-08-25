@@ -48,7 +48,7 @@ namespace CrudTest.Repository
         #region Library List
         public async Task<List<LibraryModel>> LibraryList()
         {
-            var libraries =  await _context.Libraries.ToListAsync();
+            var libraries = await _context.Libraries.ToListAsync();
             return libraries;
         }
         #endregion
@@ -67,12 +67,12 @@ namespace CrudTest.Repository
 
         public void DeleteLibraryOnPost(int id)
         {
-            var library =  _context.Libraries.Find(id);
+            var library = _context.Libraries.Find(id);
             _context.Libraries.Remove(library);
         }
         #endregion
         #region Update(Edit) Library
-        public LibraryModel UpdateLibraryOnGet(int id)
+        public LibraryBooksViewModel UpdateLibraryOnGet(int id)
         {
             var library = _context.Libraries
                         .Where(l => l.Id == id)
@@ -84,18 +84,41 @@ namespace CrudTest.Repository
 
 
                          }).FirstOrDefault();
-            return library;
+            var books = _context.Books.ToList();
+            var libraryBooks = _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
+                  .Select(s => s.BookModels).SingleOrDefault();
+ 
+            foreach (var item in libraryBooks)
+            {
+                while (books.Exists(s => s.Id == item.Id))
+                {
+                    books.Remove(item);
+                }
+            }
+
+
+            LibraryBooksViewModel libraryBooksViewModel = new LibraryBooksViewModel();
+            libraryBooksViewModel.Library = library;
+            libraryBooksViewModel.Books = books;
+            return libraryBooksViewModel;
 
         }
 
-        public void UpdateLibraryOnPost(LibraryModel libraryModel)
+        public void UpdateLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
+            List<BookModel> books = new List<BookModel>();
+            for (int i = 0; i < arrays.Count(); i++)
+            {
+                BookModel book = _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefault();
+                books.Add(book);
+            }
 
-            var library =  _context.Libraries.Find(libraryModel.Id);
+            var library = _context.Libraries.Find(libraryModel.Id);
             if (library != null)
             {
                 library.Name = libraryModel.Name;
                 library.Address = libraryModel.Address;
+                library.BookModels = books;
             }
 
         }

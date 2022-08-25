@@ -19,7 +19,7 @@ a[b-qwkcojecxa] {
 }
 
 .nav-pills .nav-link.active[b-qwkcojecxa], .nav-pills .show > .nav-link[b-qwkcojecxa] {
-  color: #fff;
+  color: red;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }

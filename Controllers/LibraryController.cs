@@ -86,10 +86,10 @@ namespace CrudTest.Controllers
         }
 
         [HttpPost]
-        public RedirectResult UpdateLibraryOnPost(LibraryModel libraryModel)
+        public RedirectResult UpdateLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
 
-            libraryRepository.UpdateLibraryOnPost(libraryModel);
+            libraryRepository.UpdateLibraryOnPost(libraryModel, arrays);
             libraryRepository.Save();
 
 

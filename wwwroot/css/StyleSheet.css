@@ -1,0 +1,32 @@
+﻿.Bodybackground {
+    background-image: url(/Backgroundimage.jpeg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Tablebackground {
+    background: linear-gradient(to right,white,darkcyan);
+    filter: blur(0.5px) brightness(90%);
+}
+
+    .Tablebackground:hover {
+        filter:blur(0)  brightness(100%);
+    }
+
+td[ class="item" ]:hover {
+    background-color:lightcoral;
+    color: black;
+}
+
+input.Test::placeholder{
+    color:gray;
+}
+
+input.backgroundcolor:focus {
+    background-color:aquamarine;
+}
+
+input:invalid {
+    background-color: #fcb9b9;
+}

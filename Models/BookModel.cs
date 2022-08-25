@@ -43,12 +43,15 @@ namespace CrudTest.Models
         public AuthorModel AuthorModel { get; set; }
 
 
-        public virtual ICollection<LibraryModel> LibraryModels { get; set; }
+        public virtual List<LibraryModel> LibraryModels { get; set; }
 
         #endregion
 
         public bool IsDeleted { get; set; }
 
+        public int Rate { get; set; }
+
+        public int Price { get; set; }
 
         private int quantity;
 

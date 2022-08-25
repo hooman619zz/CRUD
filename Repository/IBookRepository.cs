@@ -17,5 +17,9 @@ namespace CrudTest.Repository
 
         public void DeleteBooksOnPost(int id);
         public void Save();
+        public  Task<BookModel> GetBookById(int id);
+
+        public IEnumerable<BookModel> GetBooks();
+
     }
 }
