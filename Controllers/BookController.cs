@@ -122,55 +122,70 @@ namespace CrudTest.Controllers
         #endregion
 
         [HttpPost]
-        public JsonResult AjaxMethod(string sortName,int? id,string sortDirection)
+        public JsonResult AjaxMethod(string sortName,int? id,string sortDirection,int pageIndx)
         {
             var books = bookRepository.ReadBooks(id);
+            int PageSize = 10;
+            int pageIndex = pageIndx;
+            int startIndex = (pageIndex - 1) * PageSize;
             List<BookAuthorViewModel> model = new List<BookAuthorViewModel>();
             switch (sortName)
             {
                 case "BookID":
                 case "":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.Id).ToList();
+                        model = books.OrderBy(b => b.books.Id).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.Id).ToList();
+                        model = books.OrderByDescending(b => b.books.Id).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "Name":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.Name).ToList();
+                        model = books.OrderBy(b => b.books.Name).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.Name).ToList();
+                        model = books.OrderByDescending(b => b.books.Name).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "ISBN":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.ISBN).ToList();
+                        model = books.OrderBy(b => b.books.ISBN).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.ISBN).ToList();
+                        model = books.OrderByDescending(b => b.books.ISBN).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "Publisher":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.Publisher).ToList();
+                        model = books.OrderBy(b => b.books.Publisher).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.Publisher).ToList();
+                        model = books.OrderByDescending(b => b.books.Publisher).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "Rate":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.Rate).ToList();
+                        model = books.OrderBy(b => b.books.Rate).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.Rate).ToList();
+                        model = books.OrderByDescending(b => b.books.Rate).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "Price":
                     if (sortDirection == "ASC")
-                        model = books.OrderBy(b => b.books.Price).ToList();
+                        model = books.OrderBy(b => b.books.Price).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     else
-                        model = books.OrderByDescending(b => b.books.Price).ToList();
+                        model = books.OrderByDescending(b => b.books.Price).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
                 case "AuthorName":
-                    model = books.OrderBy(b => b.author.Name).ToList();
+                    model = books.OrderBy(b => b.author.Name).Skip(startIndex)
+                            .Take(PageSize).ToList();
                     break;
 
             }
-            //string jsonString = JsonSerializer.Serialize(model);
             string json = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
