@@ -47,6 +47,20 @@
 
          var sortDirection = "ASC";
          var sort="Name";
+          $.ajax({
+            type: "POST",
+            url: "/Book/AjaxMethod",
+            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex },
+            dataType: "json",
+            success:myfunc,
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+            });
+
 
          $("#Previous").click(function (e) {
             pageIndex = pageIndex-1;
