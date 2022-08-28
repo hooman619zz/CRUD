@@ -187,6 +187,7 @@ namespace CrudTest.Controllers
                     break;
 
             }
+
             string json = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore

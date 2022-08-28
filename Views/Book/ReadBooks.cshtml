@@ -18,6 +18,7 @@
                 <th scope="col"><a href="javascript:;">Publisher</a></th>
                 <th scope="col"><a href="javascript:;">Rate</a></th>
                 <th scope="col"><a href="javascript:;">Price</a></th>
+
                 <th scope="col"></th>
                 <th scope="col"></th>
 
@@ -67,7 +68,7 @@
             $("#pageIndx").text(pageIndex);
 
 
-          sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
+          //sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
             $(".myContainer").empty();
             $.ajax({
             type: "POST",
@@ -89,7 +90,7 @@
              pageIndex = pageIndex+1;
              $("#pageIndx").text(pageIndex);
 
-         sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
+         //sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
             $(".myContainer").empty();
             $.ajax({
             type: "POST",
