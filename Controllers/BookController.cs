@@ -55,6 +55,7 @@ namespace CrudTest.Controllers
         {
 
             var books = bookRepository.ReadBooks(id);
+            ViewBag.LibraryId = id;
             return View(books);
         }
         #endregion
@@ -107,6 +108,7 @@ namespace CrudTest.Controllers
         }
 
         #endregion
+
 
         #region BookById
 
