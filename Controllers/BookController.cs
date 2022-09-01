@@ -122,13 +122,17 @@ namespace CrudTest.Controllers
         #endregion
 
         [HttpPost]
-        public JsonResult AjaxMethod(string sortName,int? id,string sortDirection,int pageIndx)
+        public JsonResult AjaxMethod(string sortName, int? id, string sortDirection, int pageIndx, string availableItems)
         {
             PaginationBookModel model = new PaginationBookModel();
             var books = bookRepository.ReadBooks(id);
             int PageSize = 10;
             model.PageIndex = pageIndx;
             int startIndex = (model.PageIndex - 1) * PageSize;
+            var unavailableBooks = books.Where(b => b.books.Quantity == 0).ToList();
+            if (availableItems == "on")
+                books.RemoveAll(b => b.books.Quantity == 0);
+
             model.LastPage = books.Count() / 10 + 1;
             switch (sortName)
             {
@@ -208,7 +212,7 @@ namespace CrudTest.Controllers
         {
             System.Threading.Thread.Sleep(20000);
             IEnumerable<BookModel> Books = bookRepository.GetBooks();
-            return Json(new { data = Books, recordsFiltered= Books.Count(),recordsTotal= Books.Count()});
+            return Json(new { data = Books, recordsFiltered = Books.Count(), recordsTotal = Books.Count() });
         }
     }
 }

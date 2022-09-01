@@ -18,6 +18,10 @@
                 <th scope="col"><a href="javascript:;">Publisher</a></th>
                 <th scope="col"><a href="javascript:;">Rate</a></th>
                 <th scope="col"><a href="javascript:;">Price</a></th>
+                <th scope="col">
+                    <input id="check1" type="checkbox" checked="checked">
+                    <label for="check1">Just Available</label>
+                </th>
 
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -45,13 +49,15 @@
 <script>
         $(document).ready(function (){
          var pageIndex= parseInt($("#pageIndx").html());
-
+         var availableItems="on";
          var sortDirection = "ASC";
          var sort="Name";
-          $.ajax({
+         function LoadData()
+            {
+            $.ajax({
             type: "POST",
             url: "/Book/AjaxMethod",
-            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex },
+            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex,availableItems:availableItems },
             dataType: "json",
             success:myfunc,
             failure: function (response) {
@@ -61,6 +67,30 @@
                 console.log(response);
             }
             });
+        };
+              $( "#check1" ).change(function() {
+              var $input = $( this );
+              pageIndex =1;
+              $("#pageIndx").html("1");
+            if($input.prop( "checked" )==true)
+            {
+                availableItems="on";
+                            $(".myContainer").empty();
+
+            LoadData();
+            }
+            else{
+                availableItems="off";
+                            $(".myContainer").empty();
+
+                             LoadData();
+
+            
+            }
+            }).change();
+
+
+
 
 
          $("#Previous").click(function (e) {
@@ -70,19 +100,9 @@
 
           //sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
             $(".myContainer").empty();
-            $.ajax({
-            type: "POST",
-            url: "/Book/AjaxMethod",
-            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex },
-            dataType: "json",
-            success:myfunc,
-            failure: function (response) {
-                console.log(response);
-            },
-            error: function (response) {
-                console.log(response);
-            }
-            });
+
+             LoadData();
+
         });
 
          $("#Next").click(function (e) {
@@ -92,19 +112,8 @@
 
          //sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
             $(".myContainer").empty();
-            $.ajax({
-            type: "POST",
-            url: "/Book/AjaxMethod",
-            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex },
-            dataType: "json",
-            success:myfunc,
-            failure: function (response) {
-                console.log(response);
-            },
-            error: function (response) {
-                console.log(response);
-            }
-            });
+            LoadData();
+
         });
 
 
@@ -112,19 +121,7 @@
             sortDirection = sortDirection == "ASC" ? "DESC" : "ASC";
              sort = $(this).html();
             $(".myContainer").empty();
-            $.ajax({
-            type: "POST",
-            url: "/Book/AjaxMethod",
-            data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex },
-            dataType: "json",
-            success:myfunc,
-            failure: function (response) {
-                console.log(response);
-            },
-            error: function (response) {
-                console.log(response);
-            }
-            });
+            LoadData();
         });
         function myfunc(res){
 
@@ -168,6 +165,30 @@
                     +
                     "</span>"
                     +
+                    "</br>"
+                    +
+                    "<span>"
+                    +
+                    "<a href=http://localhost:8575/Book/DeleteBooks?id="+value.books.Id+" id=id name=id onclick=document.getElementById('myform').submit())>"
+                    +
+                    "Delete"
+                    +
+                    "</a>"
+                    +
+                    "</span>"
+                    +
+                    "</br>"
+                    +
+                    "<span>"
+                    +
+                    "<a href=http://localhost:8575/Book/UpdateBookOnGet?id="+value.books.Id+" id=id name=id onclick=document.getElementById('myform').submit())>"
+                    +
+                    "Edit"
+                    +
+                    "</a>"
+                    +
+                    "</span>"
+                    +
                     "</div>"
                     +
                     "</div>"
@@ -179,6 +200,7 @@
             });
         };
         });
+
 
 </script>
 
