@@ -1602,3 +1602,7 @@ C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\AspNet.Scri
 C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\ServiceStack.Common.dll
+C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\ServiceStack.Interfaces.dll
+C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\ServiceStack.Redis.dll
+C:\Users\Hooman\Desktop\Start\CrudTest MVC\CrudTest\bin\Debug\net6.0\ServiceStack.Text.dll

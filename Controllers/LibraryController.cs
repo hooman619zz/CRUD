@@ -10,11 +10,8 @@ namespace CrudTest.Controllers
     {
         #region ctor + jections
 
-        private ILibraryRepository libraryRepository;
-        public LibraryController(ApplicationDbContext context)
-        {
-            libraryRepository = new LibraryRepository(context);
-        }
+        UnitOfWork db = new UnitOfWork();
+
 
         #endregion
 
@@ -27,7 +24,7 @@ namespace CrudTest.Controllers
         [Authorize(Trust = "yes")]
         public async Task<IActionResult> AddLibrary()
         {
-            return View(await libraryRepository.InsertLibraryOnGet());
+            return View(await db.LibraryRepository.InsertLibraryOnGet());
         }
 
         [HttpPost]
@@ -35,8 +32,8 @@ namespace CrudTest.Controllers
         public RedirectResult AddLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
 
-            libraryRepository.InsertLibraryOnPost(libraryModel, arrays);
-            libraryRepository.Save();
+            db.LibraryRepository.InsertLibraryOnPost(libraryModel, arrays);
+            db.LibraryRepository.Save();
             return Redirect(@"~/Library/LibraryList");
 
         }
@@ -50,7 +47,7 @@ namespace CrudTest.Controllers
         public async Task<IActionResult> LibraryList()
         {
 
-            return View(await libraryRepository.LibraryList());
+            return View(await db.LibraryRepository.LibraryList());
 
         }
         #endregion
@@ -61,14 +58,14 @@ namespace CrudTest.Controllers
         [Authorize(Trust = "yes")]
         public IActionResult DeleteLibrary(int id)
         {
-            return View(libraryRepository.DeleteLibraryOnGet(id));
+            return View(db.LibraryRepository.DeleteLibraryOnGet(id));
         }
 
         [HttpPost]
         public async Task<RedirectResult> DeleteLibraryOnPost(int id)
         {
-            libraryRepository.DeleteLibraryOnPost(id);
-            libraryRepository.Save();
+            db.LibraryRepository.DeleteLibraryOnPost(id);
+            db.LibraryRepository.Save();
             return Redirect(@"~/Library/LibraryList");
         }
         #endregion
@@ -82,15 +79,15 @@ namespace CrudTest.Controllers
         [Authorize(Trust = "yes")]
         public IActionResult UpdateLibrary(int id)
         {
-            return View(libraryRepository.UpdateLibraryOnGet(id));
+            return View(db.LibraryRepository.UpdateLibraryOnGet(id));
         }
 
         [HttpPost]
         public RedirectResult UpdateLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
 
-            libraryRepository.UpdateLibraryOnPost(libraryModel, arrays);
-            libraryRepository.Save();
+            db.LibraryRepository.UpdateLibraryOnPost(libraryModel, arrays);
+            db.LibraryRepository.Save();
 
 
             return Redirect(@"~/Library/LibraryList");

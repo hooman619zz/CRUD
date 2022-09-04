@@ -12,13 +12,7 @@ namespace CrudTest.Controllers
     public class BookController : Controller
     {
         #region ctor + jections
-
-        private IBookRepository bookRepository;
-
-        public BookController(ApplicationDbContext context)
-        {
-            this.bookRepository = new BookRepository(context);
-        }
+        UnitOfWork db = new UnitOfWork();
 
         #endregion
 
@@ -30,7 +24,7 @@ namespace CrudTest.Controllers
         [HttpGet]
         public async Task<IActionResult> InsertBook()
         {
-            return View(await bookRepository.InsertBookOnGet());
+            return View(await db.BookRepository.InsertBookOnGet());
         }
 
         [HttpPost]
@@ -39,8 +33,8 @@ namespace CrudTest.Controllers
         public RedirectResult InsertBook(BookModel bookModel)
         {
 
-            bookRepository.InsertBookOnPost(bookModel);
-            bookRepository.Save();
+            db.BookRepository.InsertBookOnPost(bookModel);
+            db.BookRepository.Save();
 
 
             return Redirect(@"~/Book/ReadBooks");
@@ -54,7 +48,7 @@ namespace CrudTest.Controllers
         public IActionResult ReadBooks(int? id)
         {
 
-            var books = bookRepository.ReadBooks(id);
+            var books = db.BookRepository.ReadBooks(id);
             ViewBag.LibraryId = id;
             return View(books);
         }
@@ -66,14 +60,14 @@ namespace CrudTest.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteBooks(int id)
         {
-            return View(await bookRepository.DeleteBookOnGet(id));
+            return View(await db.BookRepository.DeleteBookOnGet(id));
         }
 
         [HttpPost]
         public async Task<RedirectResult> DeleteBooksOnPost(int id)
         {
-            await Task.Run(() => bookRepository.DeleteBooksOnPost(id));
-            bookRepository.Save();
+            await Task.Run(() => db.BookRepository.DeleteBooksOnPost(id));
+            db.BookRepository.Save();
             return Redirect(@"~/Book/ReadBooks");
         }
 
@@ -87,7 +81,7 @@ namespace CrudTest.Controllers
         [HttpGet]
         public IActionResult UpdateBookOnGet(int id)
         {
-            return View(bookRepository.UpdateBookOnGet(id));
+            return View(db.BookRepository.UpdateBookOnGet(id));
         }
 
         [HttpPost]
@@ -97,10 +91,10 @@ namespace CrudTest.Controllers
 
             if (bookModel != null)
             {
-                bookRepository.UpdateBookOnPost(bookModel);
+                db.BookRepository.UpdateBookOnPost(bookModel);
             }
 
-            bookRepository.Save();
+            db.BookRepository.Save();
 
 
             return Redirect(@"~/Book/ReadBooks");
@@ -116,7 +110,7 @@ namespace CrudTest.Controllers
         [HttpGet]
         public async Task<IActionResult> BookById(int id)
         {
-            var book = await bookRepository.GetBookById(id);
+            var book = await db.BookRepository.GetBookById(id);
             return View(book);
         }
         #endregion
@@ -127,7 +121,7 @@ namespace CrudTest.Controllers
         public JsonResult AjaxMethod(string sortName, int? id, string sortDirection, int pageIndx, string availableItems)
         {
             PaginationBookModel model = new PaginationBookModel();
-            var books = bookRepository.ReadBooks(id);
+            var books = db.BookRepository.ReadBooks(id);
             int PageSize = 10;
             model.PageIndex = pageIndx;
             int startIndex = (model.PageIndex - 1) * PageSize;
@@ -206,14 +200,14 @@ namespace CrudTest.Controllers
         public IActionResult GetBooks(int? id)
         {
 
-            var books = bookRepository.ReadBooks(id);
+            var books = db.BookRepository.ReadBooks(id);
             return View(books);
         }
         [HttpPost]
         public JsonResult LoadData()
         {
             System.Threading.Thread.Sleep(20000);
-            IEnumerable<BookModel> Books = bookRepository.GetBooks();
+            IEnumerable<BookModel> Books = db.BookRepository.GetBooks();
             return Json(new { data = Books, recordsFiltered = Books.Count(), recordsTotal = Books.Count() });
         }
     }

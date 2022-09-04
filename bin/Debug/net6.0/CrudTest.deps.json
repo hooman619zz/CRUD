@@ -17,6 +17,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "6.0.6",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.8",
           "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.6",
+          "ServiceStack.Redis.Core": "6.3.0",
           "Swashbuckle.AspNetCore": "6.3.0",
           "bootstrap": "4.0.0",
           "jQuery": "3.6.0"
@@ -1506,6 +1507,53 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "ServiceStack.Common.Core/6.3.0": {
+        "dependencies": {
+          "ServiceStack.Interfaces.Core": "6.3.0",
+          "ServiceStack.Text.Core": "6.3.0",
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Common.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
+      "ServiceStack.Interfaces.Core/6.3.0": {
+        "runtime": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
+      "ServiceStack.Redis.Core/6.3.0": {
+        "dependencies": {
+          "ServiceStack.Common.Core": "6.3.0",
+          "ServiceStack.Interfaces.Core": "6.3.0",
+          "ServiceStack.Text.Core": "6.3.0"
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Redis.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
+      "ServiceStack.Text.Core/6.3.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "6.0.0",
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Text.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.3.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
@@ -3045,6 +3093,34 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "ServiceStack.Common.Core/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Of0oT2Bozie7JIO5RAu/MJZJUVd6utm+s//4Av8bizUno1XOT4R6lYfnAJA0pi/cdI1F4NCokjisWxetU39kJg==",
+      "path": "servicestack.common.core/6.3.0",
+      "hashPath": "servicestack.common.core.6.3.0.nupkg.sha512"
+    },
+    "ServiceStack.Interfaces.Core/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vWcDWjXhXaykXrduCvXYaouVzwqHhFDZC3L/u7jqvpGNY8VDjyeaZ7qA1HGBlzAWFtI1ataXdaEOABUPgVLuDA==",
+      "path": "servicestack.interfaces.core/6.3.0",
+      "hashPath": "servicestack.interfaces.core.6.3.0.nupkg.sha512"
+    },
+    "ServiceStack.Redis.Core/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZlkXwZCdgf9frjlmsHQuQr8aUI7QMg8zBNzAedD0lZ57r0d+TIbybzX0gPczY4/y0pXOMsLWMhrGU2i/WHu30w==",
+      "path": "servicestack.redis.core/6.3.0",
+      "hashPath": "servicestack.redis.core.6.3.0.nupkg.sha512"
+    },
+    "ServiceStack.Text.Core/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qMloQCCyH24OfbpgABmz5uc9YcKOYX8Z0PuON8jE03QKJ3pWiTyQ9qkyD4ThT5FB8deGtsCCShyRdQrLO0EEQw==",
+      "path": "servicestack.text.core/6.3.0",
+      "hashPath": "servicestack.text.core.6.3.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.3.0": {
       "type": "package",

@@ -3,6 +3,7 @@ using CrudTest.Models;
 using CrudTest.Data;
 using Microsoft.EntityFrameworkCore;
 using CrudTest.Repository;
+using ServiceStack.Redis;
 
 namespace CrudTest.Controllers
 {
@@ -58,10 +59,13 @@ namespace CrudTest.Controllers
             {
                 if (user.UserName == item.UserName && user.Password == item.Password)
                 {
-
+                    using(var connection = new RedisClient())
+                    {
+                        connection.Set("userName", user.UserName);
+                    }
                     CookieOptions myCookie = new CookieOptions();
                     Response.Cookies.Append("Token", "yes", myCookie);
-                    TempData["UserName"] = $"{user.UserName}";
+                    //TempData["UserName"] = $"{user.UserName}";
                     return Redirect(@"~/Home/Index");
 
                 }
