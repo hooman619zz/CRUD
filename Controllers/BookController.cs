@@ -133,7 +133,7 @@ namespace CrudTest.Controllers
                 books.RemoveAll(b => b.books.Quantity == 0);
 
             model.LastPage = books.Count() / 10 + 1;
-            model.Books = OrderBySubject(sortName, sortDirection, startIndex, PageSize, books);
+            model.Data = OrderBySubject(sortName, sortDirection, startIndex, PageSize, books);
 
             string json = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
