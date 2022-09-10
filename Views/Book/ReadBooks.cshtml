@@ -58,7 +58,7 @@
             {
             $.ajax({
             type: "POST",
-            url: "/Book/AjaxMethod",
+            url: "/Book/LoadData",
             data: {sortName:  sort,sortDirection: sortDirection,pageIndx:pageIndex,availableItems:availableItems,id:LibId },
             dataType: "json",
             success:myfunc,

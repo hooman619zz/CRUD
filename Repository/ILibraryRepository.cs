@@ -6,14 +6,14 @@ namespace CrudTest.Repository
     {
         public Task<List<BookModel>> InsertLibraryOnGet();
 
-        public void InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays);
+        public Task InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays);
 
         public void Save();
 
         public Task<List<LibraryModel>> LibraryList();
 
         public LibraryModel DeleteLibraryOnGet(int id);
-        public void DeleteLibraryOnPost(int id);
+        public Task DeleteLibraryOnPost(int id);
 
         public LibraryBooksViewModel UpdateLibraryOnGet(int id);
 

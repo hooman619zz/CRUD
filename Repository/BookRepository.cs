@@ -33,7 +33,7 @@ namespace CrudTest.Repository
             };
             return bookListViewModel;
         }
-        public async void InsertBookOnPost(BookModel book)
+        public async Task InsertBookOnPost(BookModel book)
         {
             Random rnd = new Random();
             int rate = rnd.Next(5);
@@ -175,9 +175,9 @@ namespace CrudTest.Repository
             return book;
         }
 
-        public void DeleteBooksOnPost(int id)
+        public async Task DeleteBooksOnPost(int id)
         {
-            var book =  _context.Books.Find(id);
+            var book = await _context.Books.FindAsync(id);
             _context.Books.Remove(book);
         }
         #endregion

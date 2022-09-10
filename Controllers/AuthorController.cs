@@ -11,8 +11,11 @@ namespace CrudTest.Controllers
 
         #region ctor + jections
 
-        UnitOfWork db = new UnitOfWork();
-
+        IUnitOfWork db;
+        public AuthorController(ApplicationDbContext context)
+        {
+            db = new UnitOfWork(context);
+        }
         #endregion
 
         #region Author
@@ -30,7 +33,7 @@ namespace CrudTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<RedirectResult> AddAuthor(AuthorModel authorModel)
         {
-            await Task.Run(()=> db.AuthorRepository.InsertAuthorOnPost(authorModel));
+            await db.AuthorRepository.InsertAuthorOnPost(authorModel);
             db.AuthorRepository.Save();
             return Redirect(@"~/Author/AuthorList");
         }
@@ -56,7 +59,7 @@ namespace CrudTest.Controllers
         [Authorize(Trust = "yes")]
         public async Task<RedirectResult> DeletAuthorOnPost(int id)
         {
-            await Task.Run(()=> db.AuthorRepository.DeletAuthorOnPost(id));
+            await db.AuthorRepository.DeletAuthorOnPost(id);
             db.AuthorRepository.Save();
             return Redirect(@"~/Author/AuthorList");
         }
@@ -66,9 +69,9 @@ namespace CrudTest.Controllers
 
         #region Author List
         [Authorize(Trust = "yes")]
-        public ActionResult AuthorList()
+        public async Task<ActionResult> AuthorList()
         {
-            return View(db.AuthorRepository.AuthorList());
+            return View(await db.AuthorRepository.AuthorList());
         }
         #endregion
 

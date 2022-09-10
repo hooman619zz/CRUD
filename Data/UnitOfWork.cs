@@ -4,10 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using CrudTest.Repository;
 namespace CrudTest.Data
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        ApplicationDbContext context = new ApplicationDbContext();
-
+        ApplicationDbContext context;
+        public UnitOfWork(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
         private BookRepository bookRepository;
 
         public BookRepository BookRepository

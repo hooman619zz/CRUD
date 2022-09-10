@@ -4,12 +4,12 @@ namespace CrudTest.Repository
 {
     public interface IAuthorRepository
     {
-        public void InsertAuthorOnPost(AuthorModel authorModel);
+        public Task InsertAuthorOnPost(AuthorModel authorModel);
 
         public Task<AuthorModel> DeleteAuthorOnGet(int id);
 
-        public List<AuthorModel> AuthorList();
-        public void DeletAuthorOnPost(int id);
+        public Task<List<AuthorModel>> AuthorList();
+        public Task DeletAuthorOnPost(int id);
         public void Save();
 
     }

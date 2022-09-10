@@ -7,7 +7,7 @@ namespace CrudTest.Repository
     {
         public List<BookAuthorViewModel> ReadBooks(int? id);
 
-        public void InsertBookOnPost(BookModel book);
+        public Task InsertBookOnPost(BookModel book);
         public  Task<BookListViewModel> InsertBookOnGet();
         public void UpdateBookOnPost(BookModel book);
 
@@ -15,7 +15,7 @@ namespace CrudTest.Repository
 
         public Task<BookModel> DeleteBookOnGet(int id);
 
-        public void DeleteBooksOnPost(int id);
+        public Task DeleteBooksOnPost(int id);
         public void Save();
         public  Task<BookModel> GetBookById(int id);
 

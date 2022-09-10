@@ -10,8 +10,11 @@ namespace CrudTest.Controllers
     {
         #region ctor + jections
 
-        UnitOfWork db = new UnitOfWork();
-
+        IUnitOfWork db;
+        public LibraryController(ApplicationDbContext context)
+        {
+            db = new UnitOfWork(context);
+        }
 
         #endregion
 
@@ -29,10 +32,10 @@ namespace CrudTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public RedirectResult AddLibraryOnPost(LibraryModel libraryModel, int[] arrays)
+        public async Task<RedirectResult> AddLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
 
-            db.LibraryRepository.InsertLibraryOnPost(libraryModel, arrays);
+            await db.LibraryRepository.InsertLibraryOnPost(libraryModel, arrays);
             db.LibraryRepository.Save();
             return Redirect(@"~/Library/LibraryList");
 
@@ -64,7 +67,7 @@ namespace CrudTest.Controllers
         [HttpPost]
         public async Task<RedirectResult> DeleteLibraryOnPost(int id)
         {
-            db.LibraryRepository.DeleteLibraryOnPost(id);
+            await db.LibraryRepository.DeleteLibraryOnPost(id);
             db.LibraryRepository.Save();
             return Redirect(@"~/Library/LibraryList");
         }

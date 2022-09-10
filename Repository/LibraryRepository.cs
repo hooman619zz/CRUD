@@ -27,17 +27,17 @@ namespace CrudTest.Repository
             var books = await _context.Books.ToListAsync();
             return books;
         }
-        public void InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays)
+        public async Task InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays)
         {
             List<BookModel> books = new List<BookModel>();
             for (int i = 0; i < arrays.Count(); i++)
             {
-                BookModel book = _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefault();
+                BookModel book = await _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefaultAsync();
                 books.Add(book);
             }
 
             libraryModel.BookModels = books;
-            _context.Libraries.Add(libraryModel);
+            await _context.Libraries.AddAsync(libraryModel);
 
 
         }
@@ -65,9 +65,9 @@ namespace CrudTest.Repository
             return library;
         }
 
-        public void DeleteLibraryOnPost(int id)
+        public async Task DeleteLibraryOnPost(int id)
         {
-            var library = _context.Libraries.Find(id);
+            var library =await _context.Libraries.FindAsync(id);
             _context.Libraries.Remove(library);
         }
         #endregion
