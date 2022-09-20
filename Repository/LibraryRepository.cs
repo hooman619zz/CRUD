@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrudTest.Repository
 {
-    public class LibraryRepository : ILibraryRepository
+    public class LibraryRepository :GenericRepository<LibraryModel>, ILibraryRepository
     {
         #region ctor
         private ApplicationDbContext _context;
 
-        public LibraryRepository(ApplicationDbContext applicationDbContext)
+        public LibraryRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
             this._context = applicationDbContext;
         }
@@ -45,13 +45,6 @@ namespace CrudTest.Repository
 
 
         #endregion
-        #region Library List
-        public async Task<List<LibraryModel>> LibraryList()
-        {
-            var libraries = await _context.Libraries.ToListAsync();
-            return libraries;
-        }
-        #endregion
         #region Delete Library
         public LibraryModel DeleteLibraryOnGet(int id)
         {
@@ -65,11 +58,7 @@ namespace CrudTest.Repository
             return library;
         }
 
-        public async Task DeleteLibraryOnPost(int id)
-        {
-            var library =await _context.Libraries.FindAsync(id);
-            _context.Libraries.Remove(library);
-        }
+
         #endregion
         #region Update(Edit) Library
         public LibraryBooksViewModel UpdateLibraryOnGet(int id)

@@ -50,7 +50,7 @@ namespace CrudTest.Controllers
         public async Task<IActionResult> LibraryList()
         {
 
-            return View(await db.LibraryRepository.LibraryList());
+            return View(await db.LibraryRepository.GetAllAsync());
 
         }
         #endregion
@@ -67,8 +67,8 @@ namespace CrudTest.Controllers
         [HttpPost]
         public async Task<RedirectResult> DeleteLibraryOnPost(int id)
         {
-            await db.LibraryRepository.DeleteLibraryOnPost(id);
-            db.LibraryRepository.Save();
+            var library =await db.LibraryRepository.GetByIdAsync(id);
+            await db.LibraryRepository.DeleteAsync(library);
             return Redirect(@"~/Library/LibraryList");
         }
         #endregion

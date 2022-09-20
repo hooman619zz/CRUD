@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrudTest.Repository
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository :GenericRepository<BookModel>, IBookRepository
     {
         private ApplicationDbContext _context;
 
-        public BookRepository(ApplicationDbContext applicationDbContext)
+        public BookRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
             this._context = applicationDbContext;
         }
@@ -28,20 +28,13 @@ namespace CrudTest.Repository
             var libraries = await _context.Libraries.ToListAsync();
             BookListViewModel bookListViewModel = new BookListViewModel()
             {
+
                 AuthorModel = authors,
                 LibraryModel = libraries
             };
             return bookListViewModel;
         }
-        public async Task InsertBookOnPost(BookModel book)
-        {
-            Random rnd = new Random();
-            int rate = rnd.Next(5);
-            int price = rnd.Next(1, 1000);
-            book.Rate = rate;
-            book.Price = price;
-            await _context.Books.AddAsync(book);
-        }
+        
         #endregion
         #region book list
         /// <summary>
@@ -135,24 +128,6 @@ namespace CrudTest.Repository
 
 
 
-        /// <summary>
-        /// in method baray edit kardane ketab ha be kar miravad
-        /// </summary>
-        /// <param name="book"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void UpdateBookOnPost(BookModel bookModel)
-        {
-            var book = _context.Books.Find(bookModel.Id);
-            if (bookModel != null)
-            {
-                book.Name = bookModel.Name;
-                book.ISBN = bookModel.ISBN;
-                book.Publisher = bookModel.Publisher;
-                book.AuthorId = bookModel.AuthorId;
-                book.Quantity = bookModel.Quantity;
-
-            }
-        }
         #endregion
         #region Delete
         public async Task<BookModel> DeleteBookOnGet(int id)
@@ -175,20 +150,7 @@ namespace CrudTest.Repository
             return book;
         }
 
-        public async Task DeleteBooksOnPost(int id)
-        {
-            var book = await _context.Books.FindAsync(id);
-            _context.Books.Remove(book);
-        }
         #endregion
-        #region BookById
 
-        public async Task<BookModel> GetBookById(int id)
-        {
-            BookModel? book = await _context.Books.Where(b => b.Id == id).SingleOrDefaultAsync();
-            return book;
-        }
-
-        #endregion
     }
 }

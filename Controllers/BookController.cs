@@ -35,8 +35,10 @@ namespace CrudTest.Controllers
 
         public async Task<RedirectResult> InsertBook(BookModel bookModel)
         {
-
-            await db.BookRepository.InsertBookOnPost(bookModel);
+            Random rnd = new Random();
+            bookModel.Rate = rnd.Next(5);
+            bookModel.Price = rnd.Next(1, 1000);
+            await db.BookRepository.InsertAsync(bookModel);
             db.BookRepository.Save();
 
 
@@ -69,8 +71,8 @@ namespace CrudTest.Controllers
         [HttpPost]
         public async Task<RedirectResult> DeleteBooksOnPost(int id)
         {
-            await db.BookRepository.DeleteBooksOnPost(id);
-            db.BookRepository.Save();
+            var book =await db.BookRepository.GetByIdAsync(id);
+            await db.BookRepository.DeleteAsync(book);
             return Redirect(@"~/Book/ReadBooks");
         }
 
@@ -94,7 +96,10 @@ namespace CrudTest.Controllers
 
             if (bookModel != null)
             {
-                db.BookRepository.UpdateBookOnPost(bookModel);
+                Random rnd = new Random();
+                bookModel.Rate = rnd.Next(5);
+                bookModel.Price = rnd.Next(1, 1000);
+                db.BookRepository.Update(bookModel);
             }
 
             db.BookRepository.Save();
@@ -113,13 +118,14 @@ namespace CrudTest.Controllers
         [HttpGet]
         public async Task<IActionResult> BookById(int id)
         {
-            var book = await db.BookRepository.GetBookById(id);
+            var book = await db.BookRepository.GetByIdAsync(id);
             return View(book);
         }
         #endregion
 
         #endregion
 
+        #region Pagination
         [HttpPost]
         public JsonResult LoadData(string sortName, int? id, string sortDirection, int pageIndx, string availableItems)
         {
@@ -213,6 +219,6 @@ namespace CrudTest.Controllers
             var books = db.BookRepository.ReadBooks(id);
             return View(books);
         }
-
+        #endregion
     }
 }

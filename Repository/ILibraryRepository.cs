@@ -10,10 +10,8 @@ namespace CrudTest.Repository
 
         public void Save();
 
-        public Task<List<LibraryModel>> LibraryList();
 
         public LibraryModel DeleteLibraryOnGet(int id);
-        public Task DeleteLibraryOnPost(int id);
 
         public LibraryBooksViewModel UpdateLibraryOnGet(int id);
 

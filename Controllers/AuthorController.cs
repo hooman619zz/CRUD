@@ -33,7 +33,7 @@ namespace CrudTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<RedirectResult> AddAuthor(AuthorModel authorModel)
         {
-            await db.AuthorRepository.InsertAuthorOnPost(authorModel);
+            await db.AuthorRepository.InsertAsync(authorModel);
             db.AuthorRepository.Save();
             return Redirect(@"~/Author/AuthorList");
         }
@@ -46,21 +46,13 @@ namespace CrudTest.Controllers
 
 
         #region Delete Author
-        //[HttpGet]
-        //[Authorize(Trust = "yes")]
-        //public async Task<IActionResult> DeleteAuthor(int id)
-        //{
-
-        //    return View(await authorRepository.DeleteAuthorOnGet(id));
-
-        //}
 
         [HttpPost]
         [Authorize(Trust = "yes")]
         public async Task<RedirectResult> DeletAuthorOnPost(int id)
         {
-            await db.AuthorRepository.DeletAuthorOnPost(id);
-            db.AuthorRepository.Save();
+            var author= await db.AuthorRepository.GetByIdAsync(id);
+            await db.AuthorRepository.DeleteAsync(author);
             return Redirect(@"~/Author/AuthorList");
         }
 
@@ -71,7 +63,7 @@ namespace CrudTest.Controllers
         [Authorize(Trust = "yes")]
         public async Task<ActionResult> AuthorList()
         {
-            return View(await db.AuthorRepository.AuthorList());
+            return View(await db.AuthorRepository.GetAllAsync());
         }
         #endregion
 
