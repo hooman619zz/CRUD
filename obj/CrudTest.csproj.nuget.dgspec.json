@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {}
+    "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {
+    "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+        "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
         "projectName": "CrudTest",
-        "projectPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+        "projectPath": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
         "packagesPath": "C:\\Users\\Hooman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\obj\\",
+        "outputPath": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hooman\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,14 @@
             "AspNet.ScriptManager.jQuery": {
               "target": "Package",
               "version": "[3.6.0, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
@@ -115,7 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.109\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.110\\RuntimeIdentifierGraph.json"
         }
       }
     }

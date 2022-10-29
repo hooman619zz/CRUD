@@ -40,8 +40,7 @@ namespace CrudTest.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("BookId");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -55,15 +54,14 @@ namespace CrudTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Book", "Person");
+                    b.ToTable("Author", "Person");
                 });
 
             modelBuilder.Entity("CrudTest.Models.BookModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("BookId");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -108,8 +106,7 @@ namespace CrudTest.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("LibraryId");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -124,7 +121,7 @@ namespace CrudTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Libraries");
+                    b.ToTable("LibraryModel");
                 });
 
             modelBuilder.Entity("CrudTest.Models.UserModel", b =>

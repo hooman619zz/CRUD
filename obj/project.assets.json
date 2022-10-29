@@ -14,6 +14,31 @@
           "lib/net45/AspNet.ScriptManager.jQuery.dll": {}
         }
       },
+      "Autofac/6.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "4.7.1"
+        },
+        "compile": {
+          "lib/net6.0/Autofac.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Autofac.dll": {}
+        }
+      },
+      "Autofac.Extensions.DependencyInjection/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Autofac": "6.4.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Autofac.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Autofac.Extensions.DependencyInjection.dll": {}
+        }
+      },
       "bootstrap/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -3274,6 +3299,47 @@
         "aspnet.scriptmanager.jquery.nuspec",
         "lib/net40/AspNet.ScriptManager.jQuery.dll",
         "lib/net45/AspNet.ScriptManager.jQuery.dll"
+      ]
+    },
+    "Autofac/6.4.0": {
+      "sha512": "tkFxl6wAPuwVhrlN8wuNADnd+k2tv4ReP7ZZSL0vjfcN0RcfC9v25ogxK6b03HC7D4NwWjSLf1G/zTG8Bw43wQ==",
+      "type": "package",
+      "path": "autofac/6.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "autofac.6.4.0.nupkg.sha512",
+        "autofac.nuspec",
+        "icon.png",
+        "lib/net5.0/Autofac.dll",
+        "lib/net5.0/Autofac.xml",
+        "lib/net6.0/Autofac.dll",
+        "lib/net6.0/Autofac.xml",
+        "lib/netstandard2.0/Autofac.dll",
+        "lib/netstandard2.0/Autofac.xml",
+        "lib/netstandard2.1/Autofac.dll",
+        "lib/netstandard2.1/Autofac.xml"
+      ]
+    },
+    "Autofac.Extensions.DependencyInjection/8.0.0": {
+      "sha512": "nGrXNpQX2FiZpIBydK9cxZnnoqP/cUd3k/53uRERYEqLtWzKtE15R6L+j5q5ax5Rv/+3wAIkOaPePkahfqrwjg==",
+      "type": "package",
+      "path": "autofac.extensions.dependencyinjection/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+        "autofac.extensions.dependencyinjection.nuspec",
+        "icon.png",
+        "lib/net5.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/net5.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/net6.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/net6.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.xml",
+        "lib/netstandard2.1/Autofac.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.1/Autofac.Extensions.DependencyInjection.xml"
       ]
     },
     "bootstrap/4.0.0": {
@@ -10012,6 +10078,8 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AspNet.ScriptManager.jQuery >= 3.6.0",
+      "Autofac >= 6.4.0",
+      "Autofac.Extensions.DependencyInjection >= 8.0.0",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.8",
       "Microsoft.EntityFrameworkCore >= 6.0.6",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.6",
@@ -10032,11 +10100,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+      "projectUniqueName": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
       "projectName": "CrudTest",
-      "projectPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+      "projectPath": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
       "packagesPath": "C:\\Users\\Hooman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\obj\\",
+      "outputPath": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hooman\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10068,6 +10136,14 @@
           "AspNet.ScriptManager.jQuery": {
             "target": "Package",
             "version": "[3.6.0, )"
+          },
+          "Autofac": {
+            "target": "Package",
+            "version": "[6.4.0, )"
+          },
+          "Autofac.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           },
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
             "target": "Package",
@@ -10140,7 +10216,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.109\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.110\\RuntimeIdentifierGraph.json"
       }
     }
   },

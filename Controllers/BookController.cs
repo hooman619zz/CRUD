@@ -13,9 +13,9 @@ namespace CrudTest.Controllers
     {
         #region ctor + jections
         IUnitOfWork db;
-        public BookController(ApplicationDbContext context)
+        public BookController(IUnitOfWork unitOfWork)
         {
-            db = new UnitOfWork(context);
+            db = unitOfWork;
         }
         #endregion
 

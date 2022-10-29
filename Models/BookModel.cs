@@ -9,35 +9,26 @@ namespace CrudTest.Models
 
 
     [Table("Book", Schema = "Book")]
-    public class BookModel : ISoftDelete
+    public class BookModel :BaseEntity , ISoftDelete
     {
 
         public event QuantityHandler quantityHandler;
 
-        [Key]
-        [Column("BookId")]
-        public int Id { get; set; }
 
 
-        [Required]
-        [MinLength(1, ErrorMessage = "The Name Most Be atleast 3 charaters")]
-        [MaxLength(50, ErrorMessage = "The Name cannot Be more than atleast 20 charaters")]
+
+
         public string Name { get; set; }
 
 
-        [Required]
-        [MinLength(1, ErrorMessage = "The ISBN Most Be atleast 3 charaters")]
-        [MaxLength(50, ErrorMessage = "The ISBN cannot Be more than atleast 20 charaters")]
+
         public string ISBN { get; set; }
 
 
-        [Required]
-        [MinLength(1, ErrorMessage = "The Publisher Most Be atleast 3 charaters")]
-        [MaxLength(50, ErrorMessage = "The Publisher cannot Be more than atleast 20 charaters")]
+
         public string Publisher { get; set; }
 
         #region Navigation props
-        [ForeignKey("AuthorModel")]
         public int AuthorId { get; set; }
 
         public AuthorModel AuthorModel { get; set; }

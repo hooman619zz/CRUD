@@ -2,7 +2,6 @@
 using CrudTest.Data;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace CrudTest.Repository
 {
     public class AuthorRepository :GenericRepository<AuthorModel>, IAuthorRepository
@@ -15,11 +14,13 @@ namespace CrudTest.Repository
         }
 
 
+
         #region Save
         public void Save()
         {
             _context.SaveChanges();
         }
+
         #endregion
 
     }

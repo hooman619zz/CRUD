@@ -4,42 +4,58 @@
 
 namespace CrudTest.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Book");
-
-            migrationBuilder.EnsureSchema(
                 name: "Person");
 
+            migrationBuilder.EnsureSchema(
+                name: "Book");
+
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "Author",
                 schema: "Person",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.BookId);
+                    table.PrimaryKey("PK_Author", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Libraries",
+                name: "LibraryModel",
                 columns: table => new
                 {
-                    LibraryId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Libraries", x => x.LibraryId);
+                    table.PrimaryKey("PK_LibraryModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                schema: "Person",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,23 +63,26 @@ namespace CrudTest.Migrations
                 schema: "Book",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Publisher = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Rate = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.BookId);
+                    table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_Book_AuthorId",
+                        name: "FK_Book_Author_AuthorId",
                         column: x => x.AuthorId,
                         principalSchema: "Person",
-                        principalTable: "Book",
-                        principalColumn: "BookId",
+                        principalTable: "Author",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -82,13 +101,13 @@ namespace CrudTest.Migrations
                         column: x => x.BookModelsId,
                         principalSchema: "Book",
                         principalTable: "Book",
-                        principalColumn: "BookId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookModelLibraryModel_Libraries_LibraryModelsId",
+                        name: "FK_BookModelLibraryModel_LibraryModel_LibraryModelsId",
                         column: x => x.LibraryModelsId,
-                        principalTable: "Libraries",
-                        principalColumn: "LibraryId",
+                        principalTable: "LibraryModel",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -110,14 +129,18 @@ namespace CrudTest.Migrations
                 name: "BookModelLibraryModel");
 
             migrationBuilder.DropTable(
+                name: "Users",
+                schema: "Person");
+
+            migrationBuilder.DropTable(
                 name: "Book",
                 schema: "Book");
 
             migrationBuilder.DropTable(
-                name: "Libraries");
+                name: "LibraryModel");
 
             migrationBuilder.DropTable(
-                name: "Book",
+                name: "Author",
                 schema: "Person");
         }
     }

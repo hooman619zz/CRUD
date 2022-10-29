@@ -7,9 +7,9 @@ namespace CrudTest.Data
 {
     public interface IUnitOfWork
     {
-        public BookRepository BookRepository { get; }
-        public AuthorRepository AuthorRepository { get; }
-        public LibraryRepository LibraryRepository { get; }
+        public IBookRepository BookRepository { get; }
+        public IAuthorRepository AuthorRepository { get; }
+        public ILibraryRepository LibraryRepository { get; }
 
     }
 }

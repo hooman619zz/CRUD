@@ -5,12 +5,7 @@ namespace CrudTest.Data
     public class ApplicationDbContext : DbContext
     {
 
-        #region Dbset
-        public DbSet<BookModel> Books { get; set; }
-        public DbSet<AuthorModel> Authors { get; set; }
-        public DbSet<LibraryModel> Libraries { get; set; }
-        public DbSet<UserModel> Users { get; set; }
-        #endregion
+
 
 
         #region Save Change Override
@@ -75,12 +70,27 @@ namespace CrudTest.Data
             modelBuilder.Entity<BookModel>().HasQueryFilter(b => !b.IsDeleted);
             modelBuilder.Entity<AuthorModel>().HasQueryFilter(b => !b.IsDeleted);
 
+            modelBuilder.Entity<AuthorModel>().Property(a => a.Name).IsRequired().HasMaxLength(50);
+
+            modelBuilder.Entity<BookModel>().Property(b => b.Name).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<BookModel>().Property(b => b.ISBN).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<BookModel>().Property(b => b.Publisher).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<BookModel>().HasOne(b => b.AuthorModel).WithMany(a => a.BookModels).HasForeignKey(b => b.AuthorId);
+
+            modelBuilder.Entity<LibraryModel>().Property(l => l.Name).IsRequired().HasMaxLength(50);
+
+            modelBuilder.Entity<UserModel>().Property(u => u.UserName).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<UserModel>().Property(u => u.Password).IsRequired().HasMaxLength(50);
+
 
             modelBuilder.Entity<BookModel>()
                         .HasOne<AuthorModel>(A => A.AuthorModel)
                         .WithMany(b => b.BookModels)
                         .HasForeignKey(A => A.AuthorId);
 
+            base.OnModelCreating(modelBuilder);
+            var entitiesAssembly = typeof(BaseEntity).Assembly;
+            modelBuilder.RegisterAllEntities<BaseEntity>(entitiesAssembly);
 
             base.OnModelCreating(modelBuilder);
         }

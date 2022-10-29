@@ -6,54 +6,20 @@ namespace CrudTest.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        ApplicationDbContext context;
-        public UnitOfWork(ApplicationDbContext context)
+        public IBookRepository BookRepository { get; }
+
+        public IAuthorRepository AuthorRepository { get; }
+
+        public ILibraryRepository LibraryRepository { get; }
+        private readonly ApplicationDbContext context;
+        public UnitOfWork(ApplicationDbContext context,IBookRepository bookRepository,ILibraryRepository libraryRepository,IAuthorRepository authorRepository)
         {
             this.context = context;
-        }
-        private BookRepository bookRepository;
-
-        public BookRepository BookRepository
-        {
-            get
-            {
-                if (bookRepository == null)
-                {
-                    bookRepository = new BookRepository(context);
-                }
-
-                return bookRepository;
-            }
+            this.BookRepository = bookRepository;
+            this.AuthorRepository = authorRepository;
+            this.LibraryRepository = libraryRepository;
         }
 
-        private AuthorRepository authorRepository;
 
-        public AuthorRepository AuthorRepository
-        {
-            get
-            {
-                if (authorRepository == null)
-                {
-                    authorRepository = new AuthorRepository(context);
-                }
-
-                return authorRepository;
-            }
-        }
-
-        private LibraryRepository libraryRepository;
-
-        public LibraryRepository LibraryRepository
-        {
-            get
-            {
-                if (libraryRepository == null)
-                {
-                    libraryRepository = new LibraryRepository(context);
-                }
-
-                return libraryRepository;
-            }
-        }
     }
 }

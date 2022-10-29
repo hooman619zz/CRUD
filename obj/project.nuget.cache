@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QcsCrO6kYzaBT+1/hfICVcrAO9cxHH+C+Yz/sbGRVP7JFuZxV991XYaYtsz3ZuXq1hrO1fJfZpxajQYJYcobmw==",
+  "dgSpecHash": "uiReMgbwif89jBMBT1/472kchB+NlAKWqjAe41/WdMOt/MlSVxPA1BCi2j4YoVYIpuHljEk10bLOhdFr5MKXWA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hooman\\Desktop\\Start\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
+  "projectFilePath": "C:\\Users\\Hooman\\Desktop\\Final Crud\\CrudTest MVC\\CrudTest\\CrudTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hooman\\.nuget\\packages\\aspnet.scriptmanager.jquery\\3.6.0\\aspnet.scriptmanager.jquery.3.6.0.nupkg.sha512",
+    "C:\\Users\\Hooman\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\Hooman\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\Hooman\\.nuget\\packages\\bootstrap\\4.0.0\\bootstrap.4.0.0.nupkg.sha512",
     "C:\\Users\\Hooman\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Hooman\\.nuget\\packages\\jquery\\3.6.0\\jquery.3.6.0.nupkg.sha512",

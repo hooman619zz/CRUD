@@ -3,7 +3,7 @@
 
 namespace CrudTest.Repository
 {
-    public interface IBookRepository :IGenericRepository<BookModel>, IDisposable
+    public interface IBookRepository :IGenericRepository<BookModel>
     {
         public List<BookAuthorViewModel> ReadBooks(int? id);
 

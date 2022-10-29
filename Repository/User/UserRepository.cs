@@ -17,7 +17,7 @@ namespace CrudTest.Repository
         #region Add User
         public void InsertUserOnPost(UserModel userModel)
         {
-            _context.Users.AddAsync(userModel);
+            _context.Set<UserModel>().AddAsync(userModel);
         }
         #endregion
 
@@ -31,7 +31,7 @@ namespace CrudTest.Repository
         #region List
         public List<UserModel> UserList()
         {
-            var users = _context.Users.ToList();
+            var users = _context.Set<UserModel>().ToList();
             return users;
         }
         #endregion

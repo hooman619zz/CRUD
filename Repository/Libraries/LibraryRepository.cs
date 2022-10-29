@@ -24,7 +24,7 @@ namespace CrudTest.Repository
         #region Add Library
         public async Task<List<BookModel>> InsertLibraryOnGet()
         {
-            var books = await _context.Books.ToListAsync();
+            var books = await _context.Set<BookModel>().ToListAsync();
             return books;
         }
         public async Task InsertLibraryOnPost(LibraryModel libraryModel, int[] arrays)
@@ -32,12 +32,12 @@ namespace CrudTest.Repository
             List<BookModel> books = new List<BookModel>();
             for (int i = 0; i < arrays.Count(); i++)
             {
-                BookModel book = await _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefaultAsync();
+                BookModel book = await _context.Set<BookModel>().Where(b => b.Id == arrays[i]).FirstOrDefaultAsync();
                 books.Add(book);
             }
 
             libraryModel.BookModels = books;
-            await _context.Libraries.AddAsync(libraryModel);
+            await _context.Set<LibraryModel>().AddAsync(libraryModel);
 
 
         }
@@ -48,7 +48,7 @@ namespace CrudTest.Repository
         #region Delete Library
         public LibraryModel DeleteLibraryOnGet(int id)
         {
-            var library = _context.Libraries
+            var library = _context.Set<LibraryModel>()
                             .Where(a => a.Id == id)
                              .Select(s => new LibraryModel()
                              {
@@ -63,7 +63,7 @@ namespace CrudTest.Repository
         #region Update(Edit) Library
         public LibraryBooksViewModel UpdateLibraryOnGet(int id)
         {
-            var library = _context.Libraries
+            var library = _context.Set<LibraryModel>()
                         .Where(l => l.Id == id)
                          .Select(s => new LibraryModel()
                          {
@@ -73,8 +73,8 @@ namespace CrudTest.Repository
 
 
                          }).FirstOrDefault();
-            var books = _context.Books.ToList();
-            var libraryBooks = _context.Libraries.Include(b => b.BookModels).Where(l => l.Id == id)
+            var books = _context.Set<BookModel>().ToList();
+            var libraryBooks = _context.Set<LibraryModel>().Include(b => b.BookModels).Where(l => l.Id == id)
                   .Select(s => s.BookModels).SingleOrDefault();
  
             foreach (var item in libraryBooks)
@@ -98,11 +98,11 @@ namespace CrudTest.Repository
             List<BookModel> books = new List<BookModel>();
             for (int i = 0; i < arrays.Count(); i++)
             {
-                BookModel book = _context.Books.Where(b => b.Id == arrays[i]).FirstOrDefault();
+                BookModel book = _context.Set<BookModel>().Where(b => b.Id == arrays[i]).FirstOrDefault();
                 books.Add(book);
             }
 
-            var library = _context.Libraries.Find(libraryModel.Id);
+            var library = _context.Set<LibraryModel>().Find(libraryModel.Id);
             if (library != null)
             {
                 library.Name = libraryModel.Name;
@@ -111,6 +111,8 @@ namespace CrudTest.Repository
             }
 
         }
+
+       
         #endregion
 
     }

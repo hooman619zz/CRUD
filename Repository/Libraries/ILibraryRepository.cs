@@ -2,7 +2,7 @@
 
 namespace CrudTest.Repository
 {
-    public interface ILibraryRepository
+    public interface ILibraryRepository:IGenericRepository<LibraryModel>
     {
         public Task<List<BookModel>> InsertLibraryOnGet();
 
